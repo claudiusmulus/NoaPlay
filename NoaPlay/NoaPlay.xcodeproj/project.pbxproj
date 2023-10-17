@@ -12,8 +12,6 @@
 		D387B9ED2ADF264200F0A191 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D387B9EC2ADF264200F0A191 /* Assets.xcassets */; };
 		D387B9F02ADF264200F0A191 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D387B9EF2ADF264200F0A191 /* Preview Assets.xcassets */; };
 		D387B9FA2ADF264200F0A191 /* NoaPlayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D387B9F92ADF264200F0A191 /* NoaPlayTests.swift */; };
-		D387BA042ADF264200F0A191 /* NoaPlayUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D387BA032ADF264200F0A191 /* NoaPlayUITests.swift */; };
-		D387BA062ADF264200F0A191 /* NoaPlayUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D387BA052ADF264200F0A191 /* NoaPlayUITestsLaunchTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,8 +40,6 @@
 		D387B9F52ADF264200F0A191 /* NoaPlayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NoaPlayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D387B9F92ADF264200F0A191 /* NoaPlayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoaPlayTests.swift; sourceTree = "<group>"; };
 		D387B9FF2ADF264200F0A191 /* NoaPlayUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NoaPlayUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D387BA032ADF264200F0A191 /* NoaPlayUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoaPlayUITests.swift; sourceTree = "<group>"; };
-		D387BA052ADF264200F0A191 /* NoaPlayUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoaPlayUITestsLaunchTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,7 +72,6 @@
 			children = (
 				D387B9E72ADF264100F0A191 /* NoaPlay */,
 				D387B9F82ADF264200F0A191 /* NoaPlayTests */,
-				D387BA022ADF264200F0A191 /* NoaPlayUITests */,
 				D387B9E62ADF264100F0A191 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -116,15 +111,6 @@
 				D387B9F92ADF264200F0A191 /* NoaPlayTests.swift */,
 			);
 			path = NoaPlayTests;
-			sourceTree = "<group>";
-		};
-		D387BA022ADF264200F0A191 /* NoaPlayUITests */ = {
-			isa = PBXGroup;
-			children = (
-				D387BA032ADF264200F0A191 /* NoaPlayUITests.swift */,
-				D387BA052ADF264200F0A191 /* NoaPlayUITestsLaunchTests.swift */,
-			);
-			path = NoaPlayUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -274,8 +260,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D387BA042ADF264200F0A191 /* NoaPlayUITests.swift in Sources */,
-				D387BA062ADF264200F0A191 /* NoaPlayUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
