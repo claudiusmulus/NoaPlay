@@ -12,6 +12,13 @@
 		D387B9ED2ADF264200F0A191 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D387B9EC2ADF264200F0A191 /* Assets.xcassets */; };
 		D387B9F02ADF264200F0A191 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D387B9EF2ADF264200F0A191 /* Preview Assets.xcassets */; };
 		D387B9FA2ADF264200F0A191 /* NoaPlayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D387B9F92ADF264200F0A191 /* NoaPlayTests.swift */; };
+		D387BA142AE017B000F0A191 /* MemoryCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D387BA132AE017B000F0A191 /* MemoryCard.swift */; };
+		D387BA162AE017C200F0A191 /* CardFlipEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = D387BA152AE017C200F0A191 /* CardFlipEffect.swift */; };
+		D387BA182AE0188700F0A191 /* MemoryCardBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D387BA172AE0188700F0A191 /* MemoryCardBoard.swift */; };
+		D387BA1B2AE01DAE00F0A191 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = D387BA1A2AE01DAE00F0A191 /* ComposableArchitecture */; };
+		D387BA1D2AE0234400F0A191 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = D387BA1C2AE0234400F0A191 /* Models.swift */; };
+		D3E4395B2AE2D3A9003F040A /* ScaleBounceEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E4395A2AE2D3A9003F040A /* ScaleBounceEffect.swift */; };
+		D3E4395D2AE2F2B7003F040A /* OutlineOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E4395C2AE2F2B7003F040A /* OutlineOverlay.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +47,12 @@
 		D387B9F52ADF264200F0A191 /* NoaPlayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NoaPlayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D387B9F92ADF264200F0A191 /* NoaPlayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoaPlayTests.swift; sourceTree = "<group>"; };
 		D387B9FF2ADF264200F0A191 /* NoaPlayUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NoaPlayUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D387BA132AE017B000F0A191 /* MemoryCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCard.swift; sourceTree = "<group>"; };
+		D387BA152AE017C200F0A191 /* CardFlipEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFlipEffect.swift; sourceTree = "<group>"; };
+		D387BA172AE0188700F0A191 /* MemoryCardBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCardBoard.swift; sourceTree = "<group>"; };
+		D387BA1C2AE0234400F0A191 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		D3E4395A2AE2D3A9003F040A /* ScaleBounceEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleBounceEffect.swift; sourceTree = "<group>"; };
+		D3E4395C2AE2F2B7003F040A /* OutlineOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlineOverlay.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D387BA1B2AE01DAE00F0A191 /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,6 +81,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D353D7E02AE2D2E200222B51 /* Modifiers */ = {
+			isa = PBXGroup;
+			children = (
+				D387BA152AE017C200F0A191 /* CardFlipEffect.swift */,
+				D3E4395A2AE2D3A9003F040A /* ScaleBounceEffect.swift */,
+				D3E4395C2AE2F2B7003F040A /* OutlineOverlay.swift */,
+			);
+			path = Modifiers;
+			sourceTree = "<group>";
+		};
 		D387B9DC2ADF264100F0A191 = {
 			isa = PBXGroup;
 			children = (
@@ -89,6 +113,7 @@
 		D387B9E72ADF264100F0A191 /* NoaPlay */ = {
 			isa = PBXGroup;
 			children = (
+				D387BA122AE0179100F0A191 /* MemoryCards */,
 				D387B9E82ADF264100F0A191 /* NoaPlayApp.swift */,
 				D387B9EA2ADF264100F0A191 /* ContentView.swift */,
 				D387B9EC2ADF264200F0A191 /* Assets.xcassets */,
@@ -113,6 +138,17 @@
 			path = NoaPlayTests;
 			sourceTree = "<group>";
 		};
+		D387BA122AE0179100F0A191 /* MemoryCards */ = {
+			isa = PBXGroup;
+			children = (
+				D353D7E02AE2D2E200222B51 /* Modifiers */,
+				D387BA132AE017B000F0A191 /* MemoryCard.swift */,
+				D387BA172AE0188700F0A191 /* MemoryCardBoard.swift */,
+				D387BA1C2AE0234400F0A191 /* Models.swift */,
+			);
+			path = MemoryCards;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -129,6 +165,9 @@
 			dependencies = (
 			);
 			name = NoaPlay;
+			packageProductDependencies = (
+				D387BA1A2AE01DAE00F0A191 /* ComposableArchitecture */,
+			);
 			productName = NoaPlay;
 			productReference = D387B9E52ADF264100F0A191 /* NoaPlay.app */;
 			productType = "com.apple.product-type.application";
@@ -201,6 +240,9 @@
 				Base,
 			);
 			mainGroup = D387B9DC2ADF264100F0A191;
+			packageReferences = (
+				D387BA192AE01DAE00F0A191 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+			);
 			productRefGroup = D387B9E62ADF264100F0A191 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -244,7 +286,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				D387B9EB2ADF264100F0A191 /* ContentView.swift in Sources */,
+				D3E4395D2AE2F2B7003F040A /* OutlineOverlay.swift in Sources */,
+				D387BA182AE0188700F0A191 /* MemoryCardBoard.swift in Sources */,
+				D387BA142AE017B000F0A191 /* MemoryCard.swift in Sources */,
+				D387BA1D2AE0234400F0A191 /* Models.swift in Sources */,
+				D387BA162AE017C200F0A191 /* CardFlipEffect.swift in Sources */,
 				D387B9E92ADF264100F0A191 /* NoaPlayApp.swift in Sources */,
+				D3E4395B2AE2D3A9003F040A /* ScaleBounceEffect.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -572,6 +620,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D387BA192AE01DAE00F0A191 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D387BA1A2AE01DAE00F0A191 /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D387BA192AE01DAE00F0A191 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D387B9DD2ADF264100F0A191 /* Project object */;
 }
