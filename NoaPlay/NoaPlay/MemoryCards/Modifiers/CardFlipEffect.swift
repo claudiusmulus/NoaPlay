@@ -9,7 +9,11 @@ import SwiftUI
 
 struct MemoryCardFlipModifier: ViewModifier, Animatable {
     
-    init(isFaceUp: Bool) {
+    let backgroundColor: Color
+    let borderColor: Color
+    init(isFaceUp: Bool, backgroundColor: Color, borderColor: Color) {
+        self.backgroundColor = backgroundColor
+        self.borderColor = borderColor
         self.rotationAngle = isFaceUp ? 0 : 180
     }
     
@@ -28,9 +32,11 @@ struct MemoryCardFlipModifier: ViewModifier, Animatable {
         ZStack {
             RoundedRectangle(cornerRadius: 20)
                 .fill(
-                    .linearGradient(colors: [.pink, .purple, .blue], startPoint: .topTrailing, endPoint: .bottomLeading)
+                    backgroundColor
                     .opacity(rotationAngle < 90 ? 0.5 : 1.0)
                 )
+                .borderOverlay(lineWidth: 5, cornerRadius: 20, color: self.rotationAngle < 90 ? .clear : borderColor)
+            
             content
                 .opacity(rotationAngle < 90 ? 1.0 : 0.0)
         }
@@ -46,7 +52,13 @@ struct MemoryCardFlipModifier: ViewModifier, Animatable {
 
 
 extension View {
-    func cardFlipEffect(isFaceUp: Bool) -> some View {
-        self.modifier(MemoryCardFlipModifier(isFaceUp: isFaceUp))
+    func cardFlipEffect(isFaceUp: Bool, backgroundColor: Color, borderColor: Color) -> some View {
+        self.modifier(
+            MemoryCardFlipModifier(
+                isFaceUp: isFaceUp,
+                backgroundColor: backgroundColor,
+                borderColor: borderColor
+            )
+        )
     }
 }

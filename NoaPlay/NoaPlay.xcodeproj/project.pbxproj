@@ -17,8 +17,10 @@
 		D387BA182AE0188700F0A191 /* MemoryCardBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D387BA172AE0188700F0A191 /* MemoryCardBoard.swift */; };
 		D387BA1B2AE01DAE00F0A191 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = D387BA1A2AE01DAE00F0A191 /* ComposableArchitecture */; };
 		D387BA1D2AE0234400F0A191 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = D387BA1C2AE0234400F0A191 /* Models.swift */; };
+		D3AB8A552AE9860D006B4CF0 /* MemoryCardLevelDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AB8A542AE9860D006B4CF0 /* MemoryCardLevelDetails.swift */; };
 		D3E4395B2AE2D3A9003F040A /* ScaleBounceEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E4395A2AE2D3A9003F040A /* ScaleBounceEffect.swift */; };
 		D3E4395D2AE2F2B7003F040A /* OutlineOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E4395C2AE2F2B7003F040A /* OutlineOverlay.swift */; };
+		D3E439612AE842A6003F040A /* Transitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E439602AE842A6003F040A /* Transitions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,8 +53,10 @@
 		D387BA152AE017C200F0A191 /* CardFlipEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFlipEffect.swift; sourceTree = "<group>"; };
 		D387BA172AE0188700F0A191 /* MemoryCardBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCardBoard.swift; sourceTree = "<group>"; };
 		D387BA1C2AE0234400F0A191 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		D3AB8A542AE9860D006B4CF0 /* MemoryCardLevelDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCardLevelDetails.swift; sourceTree = "<group>"; };
 		D3E4395A2AE2D3A9003F040A /* ScaleBounceEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleBounceEffect.swift; sourceTree = "<group>"; };
 		D3E4395C2AE2F2B7003F040A /* OutlineOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlineOverlay.swift; sourceTree = "<group>"; };
+		D3E439602AE842A6003F040A /* Transitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transitions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,7 +148,9 @@
 				D353D7E02AE2D2E200222B51 /* Modifiers */,
 				D387BA132AE017B000F0A191 /* MemoryCard.swift */,
 				D387BA172AE0188700F0A191 /* MemoryCardBoard.swift */,
+				D3AB8A542AE9860D006B4CF0 /* MemoryCardLevelDetails.swift */,
 				D387BA1C2AE0234400F0A191 /* Models.swift */,
+				D3E439602AE842A6003F040A /* Transitions.swift */,
 			);
 			path = MemoryCards;
 			sourceTree = "<group>";
@@ -288,9 +294,11 @@
 				D387B9EB2ADF264100F0A191 /* ContentView.swift in Sources */,
 				D3E4395D2AE2F2B7003F040A /* OutlineOverlay.swift in Sources */,
 				D387BA182AE0188700F0A191 /* MemoryCardBoard.swift in Sources */,
+				D3E439612AE842A6003F040A /* Transitions.swift in Sources */,
 				D387BA142AE017B000F0A191 /* MemoryCard.swift in Sources */,
 				D387BA1D2AE0234400F0A191 /* Models.swift in Sources */,
 				D387BA162AE017C200F0A191 /* CardFlipEffect.swift in Sources */,
+				D3AB8A552AE9860D006B4CF0 /* MemoryCardLevelDetails.swift in Sources */,
 				D387B9E92ADF264100F0A191 /* NoaPlayApp.swift in Sources */,
 				D3E4395B2AE2D3A9003F040A /* ScaleBounceEffect.swift in Sources */,
 			);
@@ -460,8 +468,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -489,8 +497,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

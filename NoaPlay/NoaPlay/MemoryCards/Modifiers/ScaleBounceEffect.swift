@@ -56,4 +56,15 @@ extension View {
     func scaleBounceEffect(_ value: CGFloat) -> some View {
         self.modifier(ScaleBounceModifier(value))
     }
+    
+    func scaleBounceEffect_1(_ value: CGFloat, trigger: Bool) -> some View {
+        self.phaseAnimator(
+            [1.0, value, 1.0],
+            trigger: trigger
+        ) { content, phase in
+            content.scaleEffect(phase)
+        } animation: { _ in
+            return .easeInOut(duration: 0.3)
+        }
+    }
 }

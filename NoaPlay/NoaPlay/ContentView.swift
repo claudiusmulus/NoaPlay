@@ -11,9 +11,15 @@ struct ContentView: View {
     var body: some View {
         CardBoard(
             store: .init(
-                initialState: MemoryCardBoard.State(cards: .mock)) {
-                    MemoryCardBoard()
-                }
+                initialState: MemoryCardBoard.State(
+                    mode: .default,
+                    difficulty: .easy, 
+                    style: .numbers,
+                    level: .one
+                )
+            ) {
+                MemoryCardBoard()
+            }
         )
     }
 }

@@ -25,7 +25,7 @@ struct OutlineOverlay: ViewModifier {
                         endPoint: .bottom),
                     lineWidth: lineWidth
                 )
-                .blendMode(.overlay)
+                //.blendMode(.overlay)
         )
     }
 }
