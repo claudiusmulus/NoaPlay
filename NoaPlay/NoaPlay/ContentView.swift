@@ -6,19 +6,20 @@
 //
 
 import SwiftUI
+import MemoryCards
 
 struct ContentView: View {
     var body: some View {
-        CardBoard(
+        CardBoardView(
             store: .init(
-                initialState: MemoryCardBoard.State(
+                initialState: CardBoard.State(
                     mode: .default,
                     difficulty: .easy, 
                     style: .numbers,
                     level: .one
                 )
             ) {
-                MemoryCardBoard()
+                CardBoard()
             }
         )
     }

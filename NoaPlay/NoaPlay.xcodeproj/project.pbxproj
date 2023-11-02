@@ -12,15 +12,13 @@
 		D387B9ED2ADF264200F0A191 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D387B9EC2ADF264200F0A191 /* Assets.xcassets */; };
 		D387B9F02ADF264200F0A191 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D387B9EF2ADF264200F0A191 /* Preview Assets.xcassets */; };
 		D387B9FA2ADF264200F0A191 /* NoaPlayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D387B9F92ADF264200F0A191 /* NoaPlayTests.swift */; };
-		D387BA142AE017B000F0A191 /* MemoryCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D387BA132AE017B000F0A191 /* MemoryCard.swift */; };
-		D387BA162AE017C200F0A191 /* CardFlipEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = D387BA152AE017C200F0A191 /* CardFlipEffect.swift */; };
-		D387BA182AE0188700F0A191 /* MemoryCardBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D387BA172AE0188700F0A191 /* MemoryCardBoard.swift */; };
-		D387BA1B2AE01DAE00F0A191 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = D387BA1A2AE01DAE00F0A191 /* ComposableArchitecture */; };
-		D387BA1D2AE0234400F0A191 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = D387BA1C2AE0234400F0A191 /* Models.swift */; };
-		D3AB8A552AE9860D006B4CF0 /* MemoryCardLevelDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AB8A542AE9860D006B4CF0 /* MemoryCardLevelDetails.swift */; };
-		D3E4395B2AE2D3A9003F040A /* ScaleBounceEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E4395A2AE2D3A9003F040A /* ScaleBounceEffect.swift */; };
-		D3E4395D2AE2F2B7003F040A /* OutlineOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E4395C2AE2F2B7003F040A /* OutlineOverlay.swift */; };
-		D3E439612AE842A6003F040A /* Transitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E439602AE842A6003F040A /* Transitions.swift */; };
+		D3C834E12AF2921F00ECE60C /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = D3C834E02AF2921F00ECE60C /* Models */; };
+		D3C834E32AF2964C00ECE60C /* Theme in Frameworks */ = {isa = PBXBuildFile; productRef = D3C834E22AF2964C00ECE60C /* Theme */; };
+		D3C834E62AF29C2500ECE60C /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = D3C834E52AF29C2500ECE60C /* ComposableArchitecture */; };
+		D3C834E82AF2A29400ECE60C /* FormattersClient in Frameworks */ = {isa = PBXBuildFile; productRef = D3C834E72AF2A29400ECE60C /* FormattersClient */; };
+		D3C834EA2AF2A99800ECE60C /* DataGenerator in Frameworks */ = {isa = PBXBuildFile; productRef = D3C834E92AF2A99800ECE60C /* DataGenerator */; };
+		D3C834F42AF2ACE700ECE60C /* VisualComponents in Frameworks */ = {isa = PBXBuildFile; productRef = D3C834F32AF2ACE700ECE60C /* VisualComponents */; };
+		D3C834F62AF2B17300ECE60C /* MemoryCards in Frameworks */ = {isa = PBXBuildFile; productRef = D3C834F52AF2B17300ECE60C /* MemoryCards */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,14 +47,7 @@
 		D387B9F52ADF264200F0A191 /* NoaPlayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NoaPlayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D387B9F92ADF264200F0A191 /* NoaPlayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoaPlayTests.swift; sourceTree = "<group>"; };
 		D387B9FF2ADF264200F0A191 /* NoaPlayUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NoaPlayUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D387BA132AE017B000F0A191 /* MemoryCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCard.swift; sourceTree = "<group>"; };
-		D387BA152AE017C200F0A191 /* CardFlipEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFlipEffect.swift; sourceTree = "<group>"; };
-		D387BA172AE0188700F0A191 /* MemoryCardBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCardBoard.swift; sourceTree = "<group>"; };
-		D387BA1C2AE0234400F0A191 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
-		D3AB8A542AE9860D006B4CF0 /* MemoryCardLevelDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCardLevelDetails.swift; sourceTree = "<group>"; };
-		D3E4395A2AE2D3A9003F040A /* ScaleBounceEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleBounceEffect.swift; sourceTree = "<group>"; };
-		D3E4395C2AE2F2B7003F040A /* OutlineOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlineOverlay.swift; sourceTree = "<group>"; };
-		D3E439602AE842A6003F040A /* Transitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transitions.swift; sourceTree = "<group>"; };
+		D3C834DE2AF28F7D00ECE60C /* NoaPlayKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = NoaPlayKit; path = ../NoaPlayKit; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,7 +55,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D387BA1B2AE01DAE00F0A191 /* ComposableArchitecture in Frameworks */,
+				D3C834EA2AF2A99800ECE60C /* DataGenerator in Frameworks */,
+				D3C834E32AF2964C00ECE60C /* Theme in Frameworks */,
+				D3C834E12AF2921F00ECE60C /* Models in Frameworks */,
+				D3C834F62AF2B17300ECE60C /* MemoryCards in Frameworks */,
+				D3C834E82AF2A29400ECE60C /* FormattersClient in Frameworks */,
+				D3C834F42AF2ACE700ECE60C /* VisualComponents in Frameworks */,
+				D3C834E62AF29C2500ECE60C /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,22 +82,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D353D7E02AE2D2E200222B51 /* Modifiers */ = {
-			isa = PBXGroup;
-			children = (
-				D387BA152AE017C200F0A191 /* CardFlipEffect.swift */,
-				D3E4395A2AE2D3A9003F040A /* ScaleBounceEffect.swift */,
-				D3E4395C2AE2F2B7003F040A /* OutlineOverlay.swift */,
-			);
-			path = Modifiers;
-			sourceTree = "<group>";
-		};
 		D387B9DC2ADF264100F0A191 = {
 			isa = PBXGroup;
 			children = (
+				D3C834DE2AF28F7D00ECE60C /* NoaPlayKit */,
 				D387B9E72ADF264100F0A191 /* NoaPlay */,
 				D387B9F82ADF264200F0A191 /* NoaPlayTests */,
 				D387B9E62ADF264100F0A191 /* Products */,
+				D3C834DF2AF2921F00ECE60C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -117,7 +106,6 @@
 		D387B9E72ADF264100F0A191 /* NoaPlay */ = {
 			isa = PBXGroup;
 			children = (
-				D387BA122AE0179100F0A191 /* MemoryCards */,
 				D387B9E82ADF264100F0A191 /* NoaPlayApp.swift */,
 				D387B9EA2ADF264100F0A191 /* ContentView.swift */,
 				D387B9EC2ADF264200F0A191 /* Assets.xcassets */,
@@ -142,17 +130,11 @@
 			path = NoaPlayTests;
 			sourceTree = "<group>";
 		};
-		D387BA122AE0179100F0A191 /* MemoryCards */ = {
+		D3C834DF2AF2921F00ECE60C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D353D7E02AE2D2E200222B51 /* Modifiers */,
-				D387BA132AE017B000F0A191 /* MemoryCard.swift */,
-				D387BA172AE0188700F0A191 /* MemoryCardBoard.swift */,
-				D3AB8A542AE9860D006B4CF0 /* MemoryCardLevelDetails.swift */,
-				D387BA1C2AE0234400F0A191 /* Models.swift */,
-				D3E439602AE842A6003F040A /* Transitions.swift */,
 			);
-			path = MemoryCards;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -172,7 +154,13 @@
 			);
 			name = NoaPlay;
 			packageProductDependencies = (
-				D387BA1A2AE01DAE00F0A191 /* ComposableArchitecture */,
+				D3C834E02AF2921F00ECE60C /* Models */,
+				D3C834E22AF2964C00ECE60C /* Theme */,
+				D3C834E52AF29C2500ECE60C /* ComposableArchitecture */,
+				D3C834E72AF2A29400ECE60C /* FormattersClient */,
+				D3C834E92AF2A99800ECE60C /* DataGenerator */,
+				D3C834F32AF2ACE700ECE60C /* VisualComponents */,
+				D3C834F52AF2B17300ECE60C /* MemoryCards */,
 			);
 			productName = NoaPlay;
 			productReference = D387B9E52ADF264100F0A191 /* NoaPlay.app */;
@@ -247,7 +235,7 @@
 			);
 			mainGroup = D387B9DC2ADF264100F0A191;
 			packageReferences = (
-				D387BA192AE01DAE00F0A191 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+				D3C834E42AF29C2500ECE60C /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 			);
 			productRefGroup = D387B9E62ADF264100F0A191 /* Products */;
 			projectDirPath = "";
@@ -292,15 +280,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D387B9EB2ADF264100F0A191 /* ContentView.swift in Sources */,
-				D3E4395D2AE2F2B7003F040A /* OutlineOverlay.swift in Sources */,
-				D387BA182AE0188700F0A191 /* MemoryCardBoard.swift in Sources */,
-				D3E439612AE842A6003F040A /* Transitions.swift in Sources */,
-				D387BA142AE017B000F0A191 /* MemoryCard.swift in Sources */,
-				D387BA1D2AE0234400F0A191 /* Models.swift in Sources */,
-				D387BA162AE017C200F0A191 /* CardFlipEffect.swift in Sources */,
-				D3AB8A552AE9860D006B4CF0 /* MemoryCardLevelDetails.swift in Sources */,
 				D387B9E92ADF264100F0A191 /* NoaPlayApp.swift in Sources */,
-				D3E4395B2AE2D3A9003F040A /* ScaleBounceEffect.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -477,7 +457,11 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.novo.alberto.NoaPlay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_STRICT_CONCURRENCY = complete;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -506,7 +490,11 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.novo.alberto.NoaPlay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_STRICT_CONCURRENCY = complete;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -630,21 +618,45 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		D387BA192AE01DAE00F0A191 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+		D3C834E42AF29C2500ECE60C /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.2.0;
+				minimumVersion = 1.3.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		D387BA1A2AE01DAE00F0A191 /* ComposableArchitecture */ = {
+		D3C834E02AF2921F00ECE60C /* Models */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D387BA192AE01DAE00F0A191 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = Models;
+		};
+		D3C834E22AF2964C00ECE60C /* Theme */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Theme;
+		};
+		D3C834E52AF29C2500ECE60C /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D3C834E42AF29C2500ECE60C /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;
+		};
+		D3C834E72AF2A29400ECE60C /* FormattersClient */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FormattersClient;
+		};
+		D3C834E92AF2A99800ECE60C /* DataGenerator */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DataGenerator;
+		};
+		D3C834F32AF2ACE700ECE60C /* VisualComponents */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = VisualComponents;
+		};
+		D3C834F52AF2B17300ECE60C /* MemoryCards */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = MemoryCards;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
