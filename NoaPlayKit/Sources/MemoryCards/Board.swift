@@ -153,6 +153,9 @@ public struct CardBoard: Reducer {
             case .showLevelDetails(.delegate(.finishGame)):
                 // TODO.
                 state.showLevelDetails = nil
+                state.gameDuration = .seconds(0)
+                state.didStartGame = false
+                
                 return .none
             case .showLevelDetails(_):
                 return .none

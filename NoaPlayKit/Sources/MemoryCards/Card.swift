@@ -32,6 +32,21 @@ public struct Card: Reducer {
             self.isPaired = isPaired
         }
         
+        #if DEBUG
+        public init(
+            id: UUID,
+            style: MemoryCardGame.CardStyle,
+            colors: MemoryCardGame.Level.Colors,
+            isFlipped: Bool = false,
+            isPaired: Bool = false
+        ) {
+            self.id = id
+            self.style = style
+            self.colors = colors
+            self.isFlipped = isFlipped
+            self.isPaired = isPaired
+        }
+        #endif
     }
     public enum Action: Equatable {
         case delegate(Delegate)

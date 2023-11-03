@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Models
+import VisualComponents
 import ComposableArchitecture
 
 public struct LevelDetails: Reducer {
@@ -174,7 +175,7 @@ struct LevelDetailsView: View {
         viewStore: ViewStoreOf<LevelDetails>
     ) -> some View {
         VStack(spacing: 20) {
-            ActionHorizontalButton(
+            StackHorizontalButton(
                 icon: "arrow.right.circle",
                 title: "Next Level", 
                 color: viewStore.completedLevel.colors.details,
@@ -185,7 +186,7 @@ struct LevelDetailsView: View {
             }
             .frame(maxWidth: .infinity)
             
-            ActionHorizontalButton(
+            StackHorizontalButton(
                 icon: "arrow.up.circle",
                 title: "Try again",
                 color: viewStore.completedLevel.colors.details,
@@ -196,7 +197,7 @@ struct LevelDetailsView: View {
             }
             .frame(maxWidth: .infinity)
             
-            ActionHorizontalButton(
+            StackHorizontalButton(
                 icon: "xmark.circle",
                 title: "Finish",
                 color: viewStore.completedLevel.colors.details,
@@ -214,7 +215,7 @@ struct LevelDetailsView: View {
     ) -> some View {
         HStack(spacing: 10) {
             VStack {
-                ActionVerticalButton(
+                StackVerticalButton(
                     icon: "arrow.right.circle",
                     title: "Next Level",
                     color: viewStore.completedLevel.colors.details, 
@@ -225,12 +226,10 @@ struct LevelDetailsView: View {
                 }
                 .padding()
                 .frame(maxHeight: .infinity)
-                .buttonStyle(
-                    ActionButtonStyle(cornerRadius: 10, color: viewStore.completedLevel.colors.details, shadowColor: viewStore.completedLevel.colors.background))
             }
             
             VStack {
-                ActionVerticalButton(
+                StackVerticalButton(
                     icon: "arrow.up.circle",
                     title: "Try again",
                     color: viewStore.completedLevel.colors.details,
@@ -244,7 +243,7 @@ struct LevelDetailsView: View {
             }
             
             VStack {
-                ActionVerticalButton(
+                StackVerticalButton(
                     icon: "xmark.circle",
                     title: "Finish",
                     color: viewStore.completedLevel.colors.details,
@@ -271,157 +270,6 @@ struct LevelDetailsView: View {
             self.isBackgroundAppear = false
             self.isScalling = false
         }
-    }
-}
-
-struct ActionButtonStyle: ButtonStyle {
-    
-    let cornerRadius: CGFloat
-    let color: Color
-    let shadowColor: Color
-    
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .minimumScaleFactor(0.6)
-            .padding(20)
-            .frame(minWidth: 0, maxWidth: .infinity, maxHeight: .infinity)
-            .background {
-                ZStack {
-                    RoundedRectangle(cornerRadius: self.cornerRadius, style: .continuous)
-                        .shadow(
-                            color: shadowColor,
-                            radius: configuration.isPressed ? 1 : 2,
-                            x: configuration.isPressed ? -0.5 : -1,
-                            y: configuration.isPressed ? -0.5: -1
-                        )
-                        .shadow(
-                            color: .black,
-                            radius: configuration.isPressed ? 1 : 2,
-                            x: configuration.isPressed ? 0.5 : 1,
-                            y: configuration.isPressed ? 0.5: 1
-                        )
-                        .blendMode(.overlay)
-                    RoundedRectangle(cornerRadius: self.cornerRadius, style: .continuous)
-                        .fill(self.color)
-                }
-            }
-            .scaleEffect(configuration.isPressed ? 0.95: 1)
-            .foregroundColor(.white)
-            .animation(.spring(), value: configuration.isPressed)
-    }
-    
-}
-
-struct ActionVerticalButton: View {
-    
-    let icon: String
-    let title: String
-    let color: Color
-    let shadowColor: Color
-    let borderWidth: CGFloat
-    let cornerRadius: CGFloat
-    let action: () -> Void
-    
-    @ScaledMetric private var iconSize: CGFloat = 50.0
-    
-    init(
-        icon: String,
-        title: String,
-        color: Color,
-        shadowColor: Color,
-        borderWidth: CGFloat = 5,
-        cornerRadius: CGFloat = 20,
-        action: @escaping () -> Void
-    ) {
-        self.icon = icon
-        self.title = title
-        self.color = color
-        self.shadowColor = shadowColor
-        self.action = action
-        self.borderWidth = borderWidth
-        self.cornerRadius = cornerRadius
-    }
-    
-    var body: some View {
-        VStack {
-            Button(
-                action: self.action,
-                label: {
-                    VStack(spacing: 10) {
-                        Image(systemName: self.icon)
-                            .font(.system(size: self.iconSize).bold())
-                        Text(self.title)
-                            .font(.title.bold())
-                    }
-                    .padding(20)
-            })
-            .buttonStyle(
-                ActionButtonStyle(
-                    cornerRadius: self.cornerRadius,
-                    color: self.color,
-                    shadowColor: self.shadowColor
-                )
-            )
-            .frame(minWidth: 0, maxWidth: .infinity, maxHeight: .infinity)
-            .minimumScaleFactor(0.6)
-        }
-    }
-}
-
-struct ActionHorizontalButton: View {
-    
-    let icon: String
-    let title: String
-    let titleFont: Font
-    let color: Color
-    let shadowColor: Color
-    let borderWidth: CGFloat
-    let cornerRadius: CGFloat
-    let action: () -> Void
-    
-    @ScaledMetric private var iconSize: CGFloat = 25.0
-    
-    init(
-        icon: String,
-        title: String,
-        color: Color,
-        shadowColor: Color,
-        titleFont: Font = .title3.bold(),
-        borderWidth: CGFloat = 5,
-        cornerRadius: CGFloat = 20,
-        action: @escaping () -> Void
-    ) {
-        self.icon = icon
-        self.title = title
-        self.titleFont = titleFont
-        self.color = color
-        self.shadowColor = shadowColor
-        self.action = action
-        self.borderWidth = borderWidth
-        self.cornerRadius = cornerRadius
-    }
-    
-    var body: some View {
-        Button(
-            action: self.action,
-            label: {
-                HStack(spacing: 10) {
-                    Image(systemName: self.icon)
-                        .font(.system(size: self.iconSize).bold())
-                    Text(self.title)
-                        .lineLimit(1)
-                        .font(self.titleFont)
-                        .minimumScaleFactor(0.6)
-                }
-                .frame(maxWidth: .infinity)
-        })
-        .buttonStyle(
-            ActionButtonStyle(
-                cornerRadius: self.cornerRadius,
-                color: self.color,
-                shadowColor: self.shadowColor
-            )
-        )
     }
 }
 
