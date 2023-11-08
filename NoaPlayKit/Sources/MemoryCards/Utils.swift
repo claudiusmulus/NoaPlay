@@ -19,3 +19,34 @@ extension MemoryCardGame.Level {
         return .init(uniqueElements: cardsArray)
     }
 }
+
+extension MemoryCardGame.Mode {
+    var title: String {
+        switch self {
+        case .practice:
+            return "Practice"
+        case .timer:
+            return "Timer"
+        }
+    }
+    
+    var iconName: String {
+        switch self {
+        case .practice:
+            return "house.fill"
+        case .timer:
+            return "clock.fill"
+        }
+    }
+}
+
+extension MemoryCardGame.Style {
+    var title: String {
+        switch self {
+        case .numbers:
+            return "123"
+        case .letters:
+            return "Abc"
+        }
+    }
+}

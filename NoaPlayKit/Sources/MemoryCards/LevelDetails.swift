@@ -175,37 +175,61 @@ struct LevelDetailsView: View {
         viewStore: ViewStoreOf<LevelDetails>
     ) -> some View {
         VStack(spacing: 20) {
-            StackHorizontalButton(
-                icon: "arrow.right.circle",
-                title: "Next Level", 
+            ScaledButton(
                 color: viewStore.completedLevel.colors.details,
-                shadowColor: viewStore.completedLevel.colors.background
+                shadowColor: viewStore.completedLevel.colors.background,
+                action: {
+                    self.animateDissapear()
+                    viewStore.send(.goToNextLevelButtonTapped)
+                }
             ) {
-                animateDissapear()
-                viewStore.send(.goToNextLevelButtonTapped)
+                HStack(spacing: 10) {
+                    Image(systemName: "arrow.right.circle")
+                        .font(.system(size: 25).bold())
+                    Text("Next Level")
+                        .lineLimit(1)
+                        .font(.title3.bold())
+                        .minimumScaleFactor(0.6)
+                }
+                .frame(maxWidth: .infinity)
             }
-            .frame(maxWidth: .infinity)
             
-            StackHorizontalButton(
-                icon: "arrow.up.circle",
-                title: "Try again",
+            ScaledButton(
                 color: viewStore.completedLevel.colors.details,
-                shadowColor: viewStore.completedLevel.colors.background
+                shadowColor: viewStore.completedLevel.colors.background,
+                action: {
+                    self.animateDissapear()
+                    viewStore.send(.tryCurrentLevelButtonTapped)
+                }
             ) {
-                animateDissapear()
-                viewStore.send(.tryCurrentLevelButtonTapped)
+                HStack(spacing: 10) {
+                    Image(systemName: "arrow.up.circle")
+                        .font(.system(size: 25).bold())
+                    Text("Try again")
+                        .lineLimit(1)
+                        .font(.title3.bold())
+                        .minimumScaleFactor(0.6)
+                }
+                .frame(maxWidth: .infinity)
             }
-            .frame(maxWidth: .infinity)
             
-            StackHorizontalButton(
-                icon: "xmark.circle",
-                title: "Finish",
+            ScaledButton(
                 color: viewStore.completedLevel.colors.details,
-                shadowColor: viewStore.completedLevel.colors.background
+                shadowColor: viewStore.completedLevel.colors.background,
+                action: {
+                    viewStore.send(.finishGameButtonTapped)
+                }
             ) {
-                viewStore.send(.finishGameButtonTapped)
+                HStack(spacing: 10) {
+                    Image(systemName: "xmark.circle")
+                        .font(.system(size: 25).bold())
+                    Text("Finish")
+                        .lineLimit(1)
+                        .font(.title3.bold())
+                        .minimumScaleFactor(0.6)
+                }
+                .frame(maxWidth: .infinity)
             }
-            .frame(maxWidth: .infinity)
         }
         .fixedSize(horizontal: true, vertical: false)
     }
@@ -215,45 +239,65 @@ struct LevelDetailsView: View {
     ) -> some View {
         HStack(spacing: 10) {
             VStack {
-                StackVerticalButton(
-                    icon: "arrow.right.circle",
-                    title: "Next Level",
-                    color: viewStore.completedLevel.colors.details, 
-                    shadowColor: viewStore.completedLevel.colors.background
+                ScaledButton(
+                    color: viewStore.completedLevel.colors.details,
+                    shadowColor: viewStore.completedLevel.colors.background,
+                    action: {
+                        self.animateDissapear()
+                        viewStore.send(.goToNextLevelButtonTapped)
+                    }
                 ) {
-                    animateDissapear()
-                    viewStore.send(.goToNextLevelButtonTapped)
+                    VStack(spacing: 10) {
+                        Image(systemName: "arrow.right.circle")
+                            .font(.system(size: 50).bold())
+                        Text("Next Level")
+                            .font(.title.bold())
+                    }
+                    .padding(20)
+                    .frame(minWidth: 0, maxWidth: .infinity, maxHeight: .infinity)
                 }
                 .padding()
-                .frame(maxHeight: .infinity)
             }
             
             VStack {
-                StackVerticalButton(
-                    icon: "arrow.up.circle",
-                    title: "Try again",
+                ScaledButton(
                     color: viewStore.completedLevel.colors.details,
-                    shadowColor: viewStore.completedLevel.colors.background
+                    shadowColor: viewStore.completedLevel.colors.background,
+                    action: {
+                        self.animateDissapear()
+                        viewStore.send(.tryCurrentLevelButtonTapped)
+                    }
                 ) {
-                    animateDissapear()
-                    viewStore.send(.tryCurrentLevelButtonTapped)
+                    VStack(spacing: 10) {
+                        Image(systemName: "arrow.up.circle")
+                            .font(.system(size: 50).bold())
+                        Text("Try again")
+                            .font(.title.bold())
+                    }
+                    .padding(20)
+                    .frame(minWidth: 0, maxWidth: .infinity, maxHeight: .infinity)
                 }
                 .padding()
-                .frame(maxHeight: .infinity)
             }
             
             VStack {
-                StackVerticalButton(
-                    icon: "xmark.circle",
-                    title: "Finish",
+                ScaledButton(
                     color: viewStore.completedLevel.colors.details,
-                    shadowColor: viewStore.completedLevel.colors.background
+                    shadowColor: viewStore.completedLevel.colors.background,
+                    action: {
+                        viewStore.send(.finishGameButtonTapped)
+                    }
                 ) {
-                    viewStore.send(.finishGameButtonTapped)
+                    VStack(spacing: 10) {
+                        Image(systemName: "xmark.circle")
+                            .font(.system(size: 50).bold())
+                        Text("Finish")
+                            .font(.title.bold())
+                    }
+                    .padding(20)
+                    .frame(minWidth: 0, maxWidth: .infinity, maxHeight: .infinity)
                 }
                 .padding()
-                .frame(maxHeight: .infinity)
-
             }
 
         }

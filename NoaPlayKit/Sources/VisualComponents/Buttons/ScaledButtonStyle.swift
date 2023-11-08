@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct StackButtonStyle: ButtonStyle {
+public struct ScaledButtonStyle: ButtonStyle {
     let cornerRadius: CGFloat
     let color: Color
     let shadowColor: Color
@@ -16,12 +16,11 @@ public struct StackButtonStyle: ButtonStyle {
         configuration.label
             .minimumScaleFactor(0.6)
             .padding(20)
-            .frame(minWidth: 0, maxWidth: .infinity, maxHeight: .infinity)
             .background {
                 ZStack {
                     RoundedRectangle(cornerRadius: self.cornerRadius, style: .continuous)
                         .shadow(
-                            color: shadowColor,
+                            color: self.shadowColor,
                             radius: configuration.isPressed ? 1 : 2,
                             x: configuration.isPressed ? -0.5 : -1,
                             y: configuration.isPressed ? -0.5: -1

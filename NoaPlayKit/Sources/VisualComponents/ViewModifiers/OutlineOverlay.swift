@@ -16,13 +16,14 @@ public struct OutlineModifier: ViewModifier {
         content.overlay(
             RoundedRectangle(cornerRadius: cornerRadius)
                 .stroke(
-                    .linearGradient(
-                        colors: [
-                            color,
-                            color.opacity(0.6)
-                        ],
-                        startPoint: .top,
-                        endPoint: .bottom),
+//                    .linearGradient(
+//                        colors: [
+//                            color,
+//                            color.opacity(0.6)
+//                        ],
+//                        startPoint: .top,
+//                        endPoint: .bottom),
+                    color,
                     lineWidth: lineWidth
                 )
         )

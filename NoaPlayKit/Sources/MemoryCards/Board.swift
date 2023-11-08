@@ -39,7 +39,7 @@ public struct CardBoard: Reducer {
             self.difficulty = difficulty
             self.style = style
             
-            self.showTimer = mode == .default
+            self.showTimer = mode == .timer
             self.level = level
             self.cards = level.availableCards(style: style)
         }
@@ -76,15 +76,22 @@ public struct CardBoard: Reducer {
     
     public enum Action: Equatable {
         case card(id: Card.State.ID, action: Card.Action)
+        case closeGameButtonTapped
+        case delegate(Delegate)
         case showLevelDetails(LevelDetails.Action)
         case flipCard(id: Card.State.ID, value: String)
         case unflippedPair(id1: Card.State.ID, id2: Card.State.ID)
         case showMatch(id1: Card.State.ID, id2: Card.State.ID)
         case completeLevel(MemoryCardGame.Level)
         case timerTicked
+        
+        public enum Delegate: Equatable {
+            case finishGame
+        }
     }
     
     @Dependency(\.continuousClock) var clock
+    @Dependency(\.dismiss) var dismiss
     
     private enum CancelID {
         case showPairMatch
@@ -103,7 +110,7 @@ public struct CardBoard: Reducer {
                     return delegateEffect
                 }
                 state.didStartGame = true
-                guard state.mode == .default else {
+                guard state.mode == .timer else {
                     return delegateEffect
                 }
                 return .merge(
@@ -118,6 +125,17 @@ public struct CardBoard: Reducer {
                 
             case .card:
                 return .none
+            case .closeGameButtonTapped:
+                return .merge(
+                    .run { send in
+                        await send(.delegate(.finishGame))
+                        await self.dismiss()
+                    },
+                    .cancel(id: CancelID.gameTimer)
+                )
+            case .delegate:
+                return .none
+                
             case let .flipCard(id, value):
                 state.flippedPairCards.add(.init(id: id, value: value))
                 state.cards[id: id]?.isFlipped = true
@@ -155,8 +173,12 @@ public struct CardBoard: Reducer {
                 state.showLevelDetails = nil
                 state.gameDuration = .seconds(0)
                 state.didStartGame = false
+                state.reset(level: state.level)
                 
-                return .none
+                return .run { send in
+                    await send(.delegate(.finishGame))
+                    await self.dismiss()
+                }
             case .showLevelDetails(_):
                 return .none
                 
@@ -164,7 +186,7 @@ public struct CardBoard: Reducer {
                 state.showLevelDetails = .init(
                     completedLevel: level,
                     difficulty: state.difficulty,
-                    gameDuration: state.mode == .default ? state.gameDuration : nil
+                    gameDuration: state.mode == .timer ? state.gameDuration : nil
                 )
                 return .cancel(id: CancelID.gameTimer)
                 
@@ -285,28 +307,43 @@ public struct CardBoardView: View {
     }
     
     public var body: some View {
-        NavigationStack {
-            WithViewStore(self.store, observe: ViewState.init) { viewStore in
-                ScrollView {
-                    LazyVGrid(
-                        columns: [
-                            .init(.adaptive(minimum: 150, maximum: 220), spacing: 30),
-                        ],
-                        spacing: 30
-                    ) {
-                        ForEachStore(
-                            store.scope(
-                                state: \.cards,
-                                action: CardBoard.Action.card
-                            )
-                        ) { store in
-                            CardView(store: store)
-                                .frame(height: 200)
-                        }
+        WithViewStore(self.store, observe: ViewState.init) { viewStore in
+            ScrollView {
+                LazyVGrid(
+                    columns: [
+                        .init(.adaptive(minimum: 150, maximum: 220), spacing: 30),
+                    ],
+                    spacing: 30
+                ) {
+                    ForEachStore(
+                        store.scope(
+                            state: \.cards,
+                            action: CardBoard.Action.card
+                        )
+                    ) { store in
+                        CardView(store: store)
+                            .frame(height: 200)
                     }
-                    .padding(30)
                 }
-                .safeAreaInset(edge: .top, content: {
+                .padding(30)
+            }
+            .safeAreaInset(edge: .top, content: {
+                ZStack(alignment: .top) {
+                    Button(
+                        action: {
+                            viewStore.send(.closeGameButtonTapped)
+                        },
+                        label: {
+                            Image(systemName: "xmark.circle")
+                                .font(.system(size: 48, weight: .bold))
+                                .foregroundStyle(.white)
+                        }
+                    )
+                    .padding(20)
+                    .frame(maxWidth: .infinity, alignment: .topTrailing)
+                    .background(viewStore.level.colors.details)
+                    .background(ignoresSafeAreaEdges: .top)
+                    
                     if viewStore.showTimer {
                         HStack(spacing: 10) {
                             Image(systemName: viewStore.didStartGame ? "clock.fill" : "clock")
@@ -317,20 +354,17 @@ public struct CardBoardView: View {
                         }
                         .font(.system(size: 48, weight: .bold))
                         .foregroundStyle(.white)
-                        .padding(20)
-                        .frame(maxWidth: .infinity)
-                        .background(viewStore.level.colors.details)
-                        .background(ignoresSafeAreaEdges: .top)
+                        .padding(.vertical, 20)
                     }
-                })
-                .background(
-                    viewStore.level.colors.background
-                )
-                .showDetails(
-                    store: self.store.scope(state: \.showLevelDetails, action: { .showLevelDetails($0)})
-                ) { store in
-                    LevelDetailsView(store: store)
                 }
+            })
+            .background(
+                viewStore.level.colors.background
+            )
+            .showDetails(
+                store: self.store.scope(state: \.showLevelDetails, action: { .showLevelDetails($0)})
+            ) { store in
+                LevelDetailsView(store: store)
             }
         }
     }
@@ -376,7 +410,7 @@ extension View {
     CardBoardView(
         store: .init(
             initialState: CardBoard.State(
-                mode: .default,
+                mode: .timer,
                 difficulty: .easy,
                 style: .numbers,
                 level: .one

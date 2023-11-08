@@ -7,19 +7,42 @@
 
 import SwiftUI
 import MemoryCards
+import Models
 
 struct ContentView: View {
     var body: some View {
-        CardBoardView(
+//        CardBoardView(
+//            store: .init(
+//                initialState: CardBoard.State(
+//                    mode: .default,
+//                    difficulty: .easy, 
+//                    style: .numbers,
+//                    level: .one
+//                )
+//            ) {
+//                CardBoard()
+//            }
+//        )
+//        GameView(
+//            store: .init(
+//                initialState: Game.State(
+//                    availableModes: MemoryCardGame.Mode.allCases,
+//                    availableStyles: MemoryCardGame.Style.allCases
+//                )
+//            ) {
+//                Game()
+//            }
+//        )    
+        GameView(
             store: .init(
-                initialState: CardBoard.State(
-                    mode: .default,
-                    difficulty: .easy, 
-                    style: .numbers,
-                    level: .one
+                initialState: Game.State(
+                    gameOptions: .init(
+                        availableModes: MemoryCardGame.Mode.allCases,
+                        availableStyles: MemoryCardGame.Style.allCases
+                    )
                 )
             ) {
-                CardBoard()
+                Game()
             }
         )
     }

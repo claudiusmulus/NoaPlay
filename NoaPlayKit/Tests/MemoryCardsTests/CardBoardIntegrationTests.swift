@@ -15,7 +15,7 @@ final class CardBoardIntegrationTests: XCTestCase {
     func testGoToNextLevel() async {
         let store = TestStore<CardBoard.State, CardBoard.Action>(
             initialState: CardBoard.State(
-                mode: .default,
+                mode: .timer,
                 difficulty: .easy,
                 style: .numbers,
                 level: .one
@@ -63,7 +63,7 @@ final class CardBoardIntegrationTests: XCTestCase {
     func testTrySameLevelAgain() async {
         let store = TestStore<CardBoard.State, CardBoard.Action>(
             initialState: CardBoard.State(
-                mode: .default,
+                mode: .timer,
                 difficulty: .easy,
                 style: .numbers,
                 level: .one
@@ -107,7 +107,7 @@ final class CardBoardIntegrationTests: XCTestCase {
     func testFinishGame() async {
         let store = TestStore<CardBoard.State, CardBoard.Action>(
             initialState: CardBoard.State(
-                mode: .default,
+                mode: .timer,
                 difficulty: .easy,
                 style: .numbers,
                 level: .one

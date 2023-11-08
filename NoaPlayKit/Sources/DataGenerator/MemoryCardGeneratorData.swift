@@ -25,8 +25,6 @@ extension Array where Element == MemoryCardGame.CardStyle {
                 .number("B"),
                 .number("B")
             ]
-        case .animals:
-            return []
         }
     }
     
@@ -54,8 +52,6 @@ extension Array where Element == MemoryCardGame.CardStyle {
                 .number("D"),
                 .number("D")
             ]
-        case .animals:
-            return []
         }
     }
     
@@ -91,8 +87,6 @@ extension Array where Element == MemoryCardGame.CardStyle {
                 .number("F"),
                 .number("F")
             ]
-        case .animals:
-            return []
         }
     }
     
@@ -136,8 +130,6 @@ extension Array where Element == MemoryCardGame.CardStyle {
                 .number("H"),
                 .number("H")
             ]
-        case .animals:
-            return []
         }
     }
 }

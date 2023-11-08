@@ -11,15 +11,14 @@ public struct MemoryCardGame {
 }
 
 public extension MemoryCardGame {
-    enum Mode: Equatable {
+    enum Mode: Equatable, CaseIterable {
         case practice
-        case `default`
+        case timer
     }
     
-    enum Style: Equatable {
+    enum Style: Equatable, CaseIterable {
         case numbers
         case letters
-        case animals
     }
     
     enum Difficulty: Equatable {
