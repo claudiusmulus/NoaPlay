@@ -9,6 +9,7 @@ import SwiftUI
 import ComposableArchitecture
 import Models
 import FormattersClient
+import Pow
 
 public struct CardBoard: Reducer {
     
@@ -40,7 +41,7 @@ public struct CardBoard: Reducer {
             self.style = style
             
             self.showTimer = mode == .timer
-            self.level = level
+            self.level = difficulty.initialLevel()
             self.cards = level.availableCards(style: style)
         }
         
@@ -149,7 +150,7 @@ public struct CardBoard: Reducer {
                 if state.unPairedCards.isEmpty {
                     return .run { [currentLevel = state.level] send in
                         try await self.clock.sleep(for: .seconds(0.4))
-                        await send(.completeLevel(currentLevel))
+                        await send(.completeLevel(currentLevel), animation: .easeInOut(duration: 1.2))
                     }
                 }
                 
@@ -365,6 +366,7 @@ public struct CardBoardView: View {
                 store: self.store.scope(state: \.showLevelDetails, action: { .showLevelDetails($0)})
             ) { store in
                 LevelDetailsView(store: store)
+                    .transition(.opacity)
             }
         }
     }

@@ -24,7 +24,7 @@ final class LevelDetailsTests: XCTestCase {
         } withDependencies: {
             $0.uuid = .incrementing
             $0.gameDurationFormatter = .mock
-            $0.cardsGenerator = .mock
+            $0.dataGenerator = .mock
         }
         
         await store.send(.goToNextLevelButtonTapped)
@@ -44,7 +44,7 @@ final class LevelDetailsTests: XCTestCase {
         } withDependencies: {
             $0.uuid = .incrementing
             $0.gameDurationFormatter = .mock
-            $0.cardsGenerator = .mock
+            $0.dataGenerator = .mock
         }
         
         await store.send(.tryCurrentLevelButtonTapped)
@@ -64,7 +64,7 @@ final class LevelDetailsTests: XCTestCase {
         } withDependencies: {
             $0.uuid = .incrementing
             $0.gameDurationFormatter = .mock
-            $0.cardsGenerator = .mock
+            $0.dataGenerator = .mock
         }
         
         await store.send(.finishGameButtonTapped)

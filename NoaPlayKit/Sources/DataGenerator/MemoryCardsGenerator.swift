@@ -9,5 +9,6 @@ import Models
 
 public struct MemoryCardsGenerator {
     public var availableCards: (_ level: MemoryCardGame.Level, _ style: MemoryCardGame.Style) -> [MemoryCardGame.CardStyle]
+    public var initialLevel: (_ difficulty: MemoryCardGame.Difficulty) -> MemoryCardGame.Level
     public var nextLevel: (_ after: MemoryCardGame.Level, _ difficulty: MemoryCardGame.Difficulty) -> MemoryCardGame.Level?
 }

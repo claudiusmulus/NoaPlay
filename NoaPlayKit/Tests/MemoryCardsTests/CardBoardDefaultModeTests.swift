@@ -25,7 +25,7 @@ final class CardBoardDefaultModeTests: XCTestCase {
             CardBoard()
         } withDependencies: {
             $0.uuid = .incrementing
-            $0.cardsGenerator = .mock
+            $0.dataGenerator = .mock
             $0.continuousClock = clock
             $0.gameDurationFormatter = .mock
         }
@@ -89,7 +89,7 @@ final class CardBoardDefaultModeTests: XCTestCase {
             CardBoard()
         } withDependencies: {
             $0.uuid = .incrementing
-            $0.cardsGenerator = .mock
+            $0.dataGenerator = .mock
             $0.continuousClock = clock
             $0.gameDurationFormatter = .mock
         }

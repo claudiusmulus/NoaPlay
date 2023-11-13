@@ -23,22 +23,13 @@ struct ContentView: View {
 //                CardBoard()
 //            }
 //        )
-//        GameView(
-//            store: .init(
-//                initialState: Game.State(
-//                    availableModes: MemoryCardGame.Mode.allCases,
-//                    availableStyles: MemoryCardGame.Style.allCases
-//                )
-//            ) {
-//                Game()
-//            }
-//        )    
         GameView(
             store: .init(
                 initialState: Game.State(
                     gameOptions: .init(
                         availableModes: MemoryCardGame.Mode.allCases,
-                        availableStyles: MemoryCardGame.Style.allCases
+                        availableStyles: MemoryCardGame.Style.allCases,
+                        difficultyLevels: MemoryCardGame.Difficulty.allCases
                     )
                 )
             ) {

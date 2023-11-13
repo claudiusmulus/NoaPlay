@@ -51,9 +51,9 @@ public struct Game: Reducer {
         }
         Reduce { state, action in
             switch action {
-            case let .gameOptions(.delegate(.startGame(mode, style))):
+            case let .gameOptions(.delegate(.startGame(mode, style, difficulty))):
                 state.path.append(
-                    .board(.init(mode: mode, difficulty: .easy, style: style, level: .one))
+                    .board(.init(mode: mode, difficulty: difficulty, style: style, level: .one))
                 )
                 return .none
             case .gameOptions:
@@ -101,7 +101,8 @@ public struct GameView: View {
             initialState: Game.State(
                 gameOptions: .init(
                     availableModes: MemoryCardGame.Mode.allCases,
-                    availableStyles: MemoryCardGame.Style.allCases
+                    availableStyles: MemoryCardGame.Style.allCases, 
+                    difficultyLevels: MemoryCardGame.Difficulty.allCases
                 )
             )
         ) {

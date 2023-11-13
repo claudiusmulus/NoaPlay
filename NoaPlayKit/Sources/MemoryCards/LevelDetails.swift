@@ -49,7 +49,7 @@ public struct LevelDetails: Reducer {
     }
     
     @Dependency(\.continuousClock) var clock
-    @Dependency(\.cardsGenerator) var cardsGenerator
+    @Dependency(\.dataGenerator) var cardsGenerator
     
     public var body: some Reducer<State, Action> {
         Reduce { state, action in
@@ -77,7 +77,7 @@ public struct LevelDetails: Reducer {
                 }
             case .finishGameButtonTapped:
                 return .run { send in
-                    await send(.delegate(.finishGame))
+                    await send(.delegate(.finishGame), animation: .easeInOut(duration: 0.4))
                 }
             }
         }
@@ -96,76 +96,96 @@ struct LevelDetailsView: View {
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             ZStack {
-                Color(viewStore.completedLevel.colors.details)
-                    .opacity(0.5)
-                    .overlay(.ultraThinMaterial)
+                Color(viewStore.completedLevel.colors.background)
                     .ignoresSafeArea()
-                    .opacity(self.isBackgroundAppear ? 1 : 0)
                 
-                VStack(spacing: 20) {
-                    Image(systemName: "trophy.circle.fill")
-                        .font(.system(size: 96))
-                        .foregroundStyle(.white)
-                        .opacity(self.isImageAppear ? 1 : 0)
-                    
-                    Text("Hurray! You completed \(viewStore.completedLevel.message)")
-                        .font(.largeTitle)
-                        .fontWeight(.heavy)
-                        .multilineTextAlignment(.center)
-                        .foregroundStyle(.white)
-                        .opacity(self.isMessageAppear ? 1 : 0)
-                    
-                    if let gameDuration = viewStore.gameDuration {
-                        Text("Duration: " + gameDuration)
-                            .font(.largeTitle)
-                            .fontWeight(.heavy)
-                            .lineLimit(1)
-                            .foregroundStyle(.white)
-                            .opacity(self.isMessageAppear ? 1 : 0)
+                VStack(spacing: 0) {
+                    ScrollView {
+                        VStack(spacing: 20) {
+                            Image(systemName: "trophy.circle.fill")
+                                .font(.system(size: 96))
+                            
+                            Text("Hurray! You completed \(viewStore.completedLevel.message)")
+                                .font(.largeTitle)
+                                .fontWeight(.heavy)
+                                .multilineTextAlignment(.center)
+                            
+                            if let gameDuration = viewStore.gameDuration {
+                                Text("Duration: " + gameDuration)
+                                    .font(.largeTitle)
+                                    .fontWeight(.heavy)
+                                    .lineLimit(1)
+                            }
+                        }
                     }
+                    .safeAreaInset(edge: .top, content: {
+                        ZStack(alignment: .top) {
+                            Button(
+                                action: {
+                                    viewStore.send(.finishGameButtonTapped)
+                                },
+                                label: {
+                                    Image(systemName: "xmark.circle")
+                                        .font(.system(size: 48, weight: .bold))
+                                        .foregroundStyle(.black)
+                                }
+                            )
+                            .padding(20)
+                            .frame(maxWidth: .infinity, alignment: .topTrailing)
+                            .background(viewStore.completedLevel.colors.background)
+                            .background(ignoresSafeAreaEdges: .top)
+                        }
+                    })
                     
-                    ViewThatFits {
-                        horizontalActionView(viewStore: viewStore)
-                        verticalActionView(viewStore: viewStore)
+                    HStack {
+                        ScaledButton(
+                            color: viewStore.completedLevel.colors.details,
+                            shadowColor: viewStore.completedLevel.colors.background,
+                            action: {
+                                viewStore.send(.goToNextLevelButtonTapped)
+                            }
+                        ) {
+                            HStack(spacing: 20) {
+                                Image(systemName: "arrow.right.circle")
+                                    .font(.system(size: 35).bold())
+                                Text("Next Level")
+                                    .lineLimit(1)
+                                    .font(.system(size: 35).bold())
+                                    .minimumScaleFactor(0.2)
+                            }
+                            .padding(.vertical, 20)
+                            .frame(maxWidth: .infinity)
+                        }
+                        .padding([.leading], 20)
+                        .padding(.trailing, 10)
+                        
+                        ScaledButton(
+                            color: viewStore.completedLevel.colors.details,
+                            shadowColor: viewStore.completedLevel.colors.background,
+                            action: {
+                                viewStore.send(.tryCurrentLevelButtonTapped)
+                            }
+                        ) {
+                            HStack(spacing: 20) {
+                                Image(systemName: "arrow.up.circle")
+                                    .font(.system(size: 35).bold())
+                                Text("Try again")
+                                    .lineLimit(1)
+                                    .font(.system(size: 35).bold())
+                                    .minimumScaleFactor(0.2)
+                            }
+                            .padding(.vertical, 20)
+                            .frame(maxWidth: .infinity)
+                        }
+                        .padding([.trailing], 20)
+                        .padding(.leading, 10)
+                        
                     }
-                    .frame(maxWidth: .infinity)
-                    .padding(.top, 30)
-                    .opacity(self.isActionButtonsAppear ? 1 : 0)
-                }
-                .padding(.horizontal, 40)
-                .padding(.vertical, 80)
-                .background {
-                    RoundedRectangle(cornerRadius: 20, style: .continuous)
-                        .fill(viewStore.completedLevel.colors.details)
-                        .opacity(self.isBackgroundAppear ? 1 : 0)
-                        .padding()
-                        .shadow(color: .black.opacity(0.5), radius: 4, x: 1.0, y: 1.0)
-                }
-                .scaleEffect(self.isScalling ? 1 : 0.5)
-
-            }
-            .interactiveDismissDisabled()
-            .onAppear {
-                withAnimation(.easeInOut(duration: 0.4)) {
-                    self.isBackgroundAppear = true
-                }
-                withAnimation(.easeInOut(duration: 0.4).delay(0.2)) {
-                    self.isImageAppear = true
-                }
-                withAnimation(.easeInOut(duration: 0.4).delay(0.4)) {
-                    self.isMessageAppear = true
-                }
-                withAnimation(.easeInOut(duration: 0.4).delay(0.6)) {
-                    self.isActionButtonsAppear = true
-                }
-                withAnimation(
-                    .interactiveSpring(
-                        response: 0.8,
-                        dampingFraction: 0.6,
-                        blendDuration: 0.6
+                    .padding(.vertical, 20)
+                    .background(
+                        Color(viewStore.completedLevel.colors.backCard)
                     )
-                ) {
-                    self.isScalling = true
+                    .background(ignoresSafeAreaEdges: .bottom)
                 }
             }
         }

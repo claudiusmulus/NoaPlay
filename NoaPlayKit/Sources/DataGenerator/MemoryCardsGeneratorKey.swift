@@ -34,6 +34,16 @@ public extension MemoryCardsGenerator {
                 return []
             }
         },
+        initialLevel: { difficulty in
+            switch difficulty {
+            case .easy:
+                return .one
+            case .medium:
+                return .three
+            case .hard:
+                return .four
+            }
+        },
         nextLevel: { level, difficulty in
             switch level.type {
             case .one:
@@ -86,6 +96,16 @@ public extension MemoryCardsGenerator {
                 return []
             }
         },
+        initialLevel: { difficulty in
+            switch difficulty {
+            case .easy:
+                return .one
+            case .medium:
+                return .three
+            case .hard:
+                return .four
+            }
+        },
         nextLevel: { level, difficulty in
             switch level.type {
             case .one:
@@ -118,7 +138,7 @@ private enum MemoryCardsGeneratorKey: DependencyKey {
 }
 
 extension DependencyValues {
-    public var cardsGenerator: MemoryCardsGenerator {
+    public var dataGenerator: MemoryCardsGenerator {
         get { self[MemoryCardsGeneratorKey.self] }
         set { self[MemoryCardsGeneratorKey.self] = newValue }
     }

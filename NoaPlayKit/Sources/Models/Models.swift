@@ -21,9 +21,10 @@ public extension MemoryCardGame {
         case letters
     }
     
-    enum Difficulty: Equatable {
+    enum Difficulty: Equatable, CaseIterable {
         case easy
         case medium
+        case hard
     }
     
     enum CardStyle: Equatable, CustomStringConvertible {

@@ -3,4 +3,149 @@
    uuid = "14398E2F-BD26-40EE-B2AC-6BB64F58904B"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "AD31EF32-8F13-47AE-A76A-925C5F5568F0"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../NoaPlayKit/Sources/MemoryCards/Card.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "AD31EF32-8F13-47AE-A76A-925C5F5568F0 - 5b0bd53525a8c7b1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (inout MemoryCards.Card.State, MemoryCards.Card.Action) -&gt; ComposableArchitecture.Effect&lt;MemoryCards.Card.Action&gt; in MemoryCards.Card.body.getter : some"
+                  moduleName = "NoaPlay"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alberto/Development/PersonalProjects/NoaPlay/NoaPlayKit/Sources/MemoryCards/Card.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "64"
+                  endingLineNumber = "64"
+                  offsetFromSymbolStart = "524">
+               </Location>
+               <Location
+                  uuid = "AD31EF32-8F13-47AE-A76A-925C5F5568F0 - c29c39219cc9899a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable (ComposableArchitecture.Send&lt;MemoryCards.Card.Action&gt;) async -&gt; () in closure #1 (inout MemoryCards.Card.State, MemoryCards.Card.Action) -&gt; ComposableArchitecture.Effect&lt;MemoryCards.Card.Action&gt; in MemoryCards.Card.body.getter : some"
+                  moduleName = "NoaPlay"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alberto/Development/PersonalProjects/NoaPlay/NoaPlayKit/Sources/MemoryCards/Card.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "64"
+                  endingLineNumber = "64"
+                  offsetFromSymbolStart = "268">
+               </Location>
+               <Location
+                  uuid = "AD31EF32-8F13-47AE-A76A-925C5F5568F0 - f2b314a89dcc6216"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for closure #1 @Sendable (ComposableArchitecture.Send&lt;MemoryCards.Card.Action&gt;) async -&gt; () in closure #1 (inout MemoryCards.Card.State, MemoryCards.Card.Action) -&gt; ComposableArchitecture.Effect&lt;MemoryCards.Card.Action&gt; in MemoryCards.Card.body.getter : some"
+                  moduleName = "NoaPlay"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alberto/Development/PersonalProjects/NoaPlay/NoaPlayKit/Sources/MemoryCards/Card.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "64"
+                  endingLineNumber = "64"
+                  offsetFromSymbolStart = "84">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9FF8879F-4BFC-4728-BD03-5DAE9CC5040D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../NoaPlayKit/Sources/MemoryCards/Board.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4E0863D7-9BAA-40ED-9D8B-0EC2C5847FE0"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../NoaPlayKit/Sources/MemoryCards/Board.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A82AAEF7-D9C2-4680-AD88-2B973B0ADC6B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../NoaPlayKit/Sources/MemoryCards/Board.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "219"
+            endingLineNumber = "219"
+            landmarkName = "reduceDelegateAction(state:action:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "A82AAEF7-D9C2-4680-AD88-2B973B0ADC6B - 15f304a6a624b2a1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MemoryCards.CardBoard.reduceDelegateAction(state: inout MemoryCards.CardBoard.State, action: MemoryCards.Card.Action.Delegate) -&gt; ComposableArchitecture.Effect&lt;MemoryCards.CardBoard.Action&gt;"
+                  moduleName = "NoaPlay"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alberto/Development/PersonalProjects/NoaPlay/NoaPlayKit/Sources/MemoryCards/Board.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "219"
+                  endingLineNumber = "219"
+                  offsetFromSymbolStart = "1464">
+               </Location>
+               <Location
+                  uuid = "A82AAEF7-D9C2-4680-AD88-2B973B0ADC6B - 15f304a6a624b2a1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MemoryCards.CardBoard.reduceDelegateAction(state: inout MemoryCards.CardBoard.State, action: MemoryCards.Card.Action.Delegate) -&gt; ComposableArchitecture.Effect&lt;MemoryCards.CardBoard.Action&gt;"
+                  moduleName = "NoaPlay"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alberto/Development/PersonalProjects/NoaPlay/NoaPlayKit/Sources/MemoryCards/Board.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "219"
+                  endingLineNumber = "219"
+                  offsetFromSymbolStart = "1696">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

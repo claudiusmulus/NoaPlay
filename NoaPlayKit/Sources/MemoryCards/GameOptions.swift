@@ -18,30 +18,41 @@ public struct GameOptions: Reducer {
     public struct State: Equatable {
         let availableModes: [MemoryCardGame.Mode]
         let availableStyles: [MemoryCardGame.Style]
+        let difficultyLevels: [MemoryCardGame.Difficulty]
         
         var selectedMode: MemoryCardGame.Mode
         var selectedStyle: MemoryCardGame.Style
+        var selectedDifficultyLevel: MemoryCardGame.Difficulty
         
         public init(
             availableModes: [MemoryCardGame.Mode],
             availableStyles: [MemoryCardGame.Style],
+            difficultyLevels: [MemoryCardGame.Difficulty],
             selectedMode: MemoryCardGame.Mode = .practice,
-            selectedStyle: MemoryCardGame.Style = .numbers
+            selectedStyle: MemoryCardGame.Style = .numbers,
+            selectedDifficultyLevel: MemoryCardGame.Difficulty = .easy
         ) {
             self.availableModes = availableModes
             self.availableStyles = availableStyles
+            self.difficultyLevels = difficultyLevels
             self.selectedMode = selectedMode
             self.selectedStyle = selectedStyle
+            self.selectedDifficultyLevel = selectedDifficultyLevel
         }
     }
     public enum Action: Equatable {
         case delegate(Delegate)
+        case selectDifficultyTapped(difficulty: MemoryCardGame.Difficulty)
         case selectModeTapped(mode: MemoryCardGame.Mode)
         case selectStyleTapped(style: MemoryCardGame.Style)
         case startGameButtonTapped
         
         public enum Delegate: Equatable {
-            case startGame(mode: MemoryCardGame.Mode, style: MemoryCardGame.Style)
+            case startGame(
+                mode: MemoryCardGame.Mode,
+                style: MemoryCardGame.Style,
+                difficulty: MemoryCardGame.Difficulty
+            )
         }
     }
     
@@ -49,6 +60,12 @@ public struct GameOptions: Reducer {
         Reduce { state, action in
             switch action {
             case .delegate:
+                return .none
+            case let .selectDifficultyTapped(difficulty):
+                if difficulty != state.selectedDifficultyLevel {
+                    state.selectedDifficultyLevel = difficulty
+                }
+                
                 return .none
             case let .selectModeTapped(mode):
                 if mode != state.selectedMode {
@@ -61,8 +78,8 @@ public struct GameOptions: Reducer {
                 }
                 return .none
             case .startGameButtonTapped:
-                return .run { [mode = state.selectedMode, style = state.selectedStyle] send in
-                    await send(.delegate(.startGame(mode: mode, style: style)))
+                return .run { [mode = state.selectedMode, style = state.selectedStyle, difficulty = state.selectedDifficultyLevel] send in
+                    await send(.delegate(.startGame(mode: mode, style: style, difficulty: difficulty)))
                 }
             }
         }
@@ -83,6 +100,7 @@ public struct GameOptionsView: View {
                 
                 VStack(spacing: 0) {
                     ScrollView {
+                        Spacer(minLength: 20)
                         gameOptionSection(
                             options: viewStore.availableModes,
                             title: "Game mode",
@@ -93,7 +111,7 @@ public struct GameOptionsView: View {
                         ) { mode in
                             VStack(spacing: 10) {
                                 Image(systemName: mode.iconName)
-                                    .font(.system(size: 38))
+                                    .font(.system(.largeTitle))
                                 Text(mode.title)
                                     .font(.largeTitle.bold())
                                     .minimumScaleFactor(0.4)
@@ -112,7 +130,28 @@ public struct GameOptionsView: View {
                         ) { style in
                             VStack(spacing: 10) {
                                 Text(style.title)
-                                    .font(.system(size: 48).bold())
+                                    .font(.system(.largeTitle).bold())
+                                    .minimumScaleFactor(0.4)
+                                    .lineLimit(1)
+                                    .fontWeight(.heavy)
+                                    .foregroundStyle(.white)
+                                
+                            }
+                            .fontWeight(.heavy)
+                            .foregroundStyle(.white)
+                            .padding(.horizontal)
+                        }
+                        gameOptionSection(
+                            options: viewStore.difficultyLevels,
+                            title: "Difficulty",
+                            isSelected: { $0 == viewStore.selectedDifficultyLevel },
+                            action: { _ in
+                                //viewStore.send(.selectStyleTapped(style: $0))
+                            }
+                        ) { difficultyLevel in
+                            VStack(spacing: 10) {
+                                Text(difficultyLevel.title)
+                                    .font(.system(.largeTitle).bold())
                                     .minimumScaleFactor(0.4)
                                     .lineLimit(1)
                                     .fontWeight(.heavy)
@@ -120,7 +159,9 @@ public struct GameOptionsView: View {
                             }
                             .fontWeight(.heavy)
                             .foregroundStyle(.white)
+                            .padding(.horizontal)
                         }
+                        .padding(.bottom, 40)
                     }
                     HStack {
                         ScaledButton(
@@ -132,11 +173,10 @@ public struct GameOptionsView: View {
                         ) {
                             HStack(spacing: 10) {
                                 Image(systemName: "gamecontroller")
-                                    .font(.system(size: 60).bold())
                                 Text("Play")
-                                    .font(.system(size: 60).bold())
                             }
-                            .padding(.vertical, 20)
+                            .padding(.vertical, 10)
+                            .font(.system(size: 40).bold())
                             .frame(maxWidth: .infinity)
                         }
                         .padding(.horizontal, 40)
@@ -157,16 +197,16 @@ public struct GameOptionsView: View {
     @ViewBuilder
     private func gameOptionSection<Option: Hashable, Content: View>(
         options: [Option],
-        height: CGFloat = 180.0,
+        height: CGFloat = 140.0,
         title: String,
         isSelected: @escaping (Option) -> Bool,
         action: @escaping (Option) -> Void,
         @ViewBuilder label: @escaping (Option) -> Content
     ) -> some View {
         Section {
-            VStack(alignment: .leading, spacing: 5) {
+            VStack(alignment: .leading, spacing: 4) {
                 Text(title)
-                    .font(.system(size: 40).weight(.bold))
+                    .font(.system(.largeTitle).weight(.bold))
                     .frame(maxWidth: .infinity, alignment: .leading)
 
                 ScrollView(.horizontal) {
@@ -178,10 +218,10 @@ public struct GameOptionsView: View {
                             GameOption(color: .gameOption) {
                                 label(option)
                             }
-                            .borderOverlay(lineWidth: 10, cornerRadius: 20, color: isSelected(option) ? .gameAction : .clear)
+                            .borderOverlay(lineWidth: 6, cornerRadius: 20, color: isSelected(option) ? .gameAction : .clear)
                             .frame(width: 200)
                             .padding(.horizontal, 10)
-                            .padding(.vertical)
+                            .padding(.vertical, 10)
                             .onTapGesture {
                                 action(option)
                             }
@@ -190,7 +230,8 @@ public struct GameOptionsView: View {
                 }
                 .scrollIndicators(.hidden)
             }
-            .padding([.top, .leading], 40)
+            .padding(.leading, 40)
+            .padding(.top, 20)
         }
     }
 }
@@ -220,7 +261,21 @@ struct GameOption<Content: View>: View {
         store: .init(
             initialState: GameOptions.State(
                 availableModes: MemoryCardGame.Mode.allCases,
-                availableStyles: MemoryCardGame.Style.allCases
+                availableStyles: MemoryCardGame.Style.allCases, 
+                difficultyLevels: MemoryCardGame.Difficulty.allCases
+            )) {
+                GameOptions()
+            }
+    )
+}
+
+#Preview("Landscape", traits: .landscapeLeft) {
+    GameOptionsView(
+        store: .init(
+            initialState: GameOptions.State(
+                availableModes: MemoryCardGame.Mode.allCases,
+                availableStyles: MemoryCardGame.Style.allCases,
+                difficultyLevels: MemoryCardGame.Difficulty.allCases
             )) {
                 GameOptions()
             }

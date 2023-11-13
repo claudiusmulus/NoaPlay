@@ -12,11 +12,19 @@ import DataGenerator
 
 extension MemoryCardGame.Level {
     func availableCards(style: MemoryCardGame.Style) -> IdentifiedArrayOf<Card.State> {
-        @Dependency(\.cardsGenerator) var cardsGenerator
-        let cardsArray: [Card.State] = cardsGenerator.availableCards(self, style).map {
+        @Dependency(\.dataGenerator.availableCards) var cardsGenerator
+        let cardsArray: [Card.State] = cardsGenerator(self, style).map {
             .init(style: $0, colors: self.colors)
         }
         return .init(uniqueElements: cardsArray)
+    }
+}
+
+extension MemoryCardGame.Difficulty {
+    func initialLevel() -> MemoryCardGame.Level {
+        @Dependency(\.dataGenerator.initialLevel) var initialLevelGenerator
+        
+        return initialLevelGenerator(self)
     }
 }
 
@@ -47,6 +55,19 @@ extension MemoryCardGame.Style {
             return "123"
         case .letters:
             return "Abc"
+        }
+    }
+}
+
+extension MemoryCardGame.Difficulty {
+    var title: String {
+        switch self {
+        case .easy:
+            return "Easy"
+        case .medium:
+            return "Medium"
+        case .hard:
+            return "Hard"
         }
     }
 }
