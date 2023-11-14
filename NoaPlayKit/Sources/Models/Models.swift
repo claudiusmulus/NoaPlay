@@ -47,12 +47,10 @@ public extension MemoryCardGame {
     struct Level: Equatable {
         public let type: LevelType
         public let message: String
-        public let colors: Colors
         
-        public init(type: LevelType, message: String, colors: Colors) {
+        public init(type: LevelType, message: String) {
             self.type = type
             self.message = message
-            self.colors = colors
         }
         
         public enum LevelType: Equatable {
@@ -66,20 +64,6 @@ public extension MemoryCardGame {
             case eight
             case nine
             case ten
-        }
-        
-        public struct Colors: Equatable {
-            public let background: Color
-            public let backCard: Color
-            public let frontCard: Color
-            public let details: Color
-            
-            public init(background: Color, backCard: Color, frontCard: Color, details: Color) {
-                self.background = background
-                self.backCard = backCard
-                self.frontCard = frontCard
-                self.details = details
-            }
         }
     }
 }

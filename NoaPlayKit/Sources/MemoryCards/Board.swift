@@ -93,6 +93,7 @@ public struct CardBoard: Reducer {
     
     @Dependency(\.continuousClock) var clock
     @Dependency(\.dismiss) var dismiss
+    @Dependency(\.isPresented) var isPresented
     
     private enum CancelID {
         case showPairMatch
@@ -129,8 +130,8 @@ public struct CardBoard: Reducer {
             case .closeGameButtonTapped:
                 return .merge(
                     .run { send in
-                        await send(.delegate(.finishGame))
-                        await self.dismiss()
+                        //await send(.delegate(.finishGame))
+                        await self.dismiss(animation: .default)
                     },
                     .cancel(id: CancelID.gameTimer)
                 )
@@ -178,7 +179,9 @@ public struct CardBoard: Reducer {
                 
                 return .run { send in
                     await send(.delegate(.finishGame))
-                    await self.dismiss()
+                    if self.isPresented {
+                        await self.dismiss()
+                    }
                 }
             case .showLevelDetails(_):
                 return .none
@@ -328,6 +331,7 @@ public struct CardBoardView: View {
                 }
                 .padding(30)
             }
+            .scrollBounceBehavior(.basedOnSize)
             .safeAreaInset(edge: .top, content: {
                 ZStack(alignment: .top) {
                     Button(
@@ -342,7 +346,7 @@ public struct CardBoardView: View {
                     )
                     .padding(20)
                     .frame(maxWidth: .infinity, alignment: .topTrailing)
-                    .background(viewStore.level.colors.details)
+                    .background(Color.backgroundSecondary)
                     .background(ignoresSafeAreaEdges: .top)
                     
                     if viewStore.showTimer {
@@ -359,9 +363,7 @@ public struct CardBoardView: View {
                     }
                 }
             })
-            .background(
-                viewStore.level.colors.background
-            )
+            .background(Color.backgroundPrimary)
             .showDetails(
                 store: self.store.scope(state: \.showLevelDetails, action: { .showLevelDetails($0)})
             ) { store in

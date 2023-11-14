@@ -56,6 +56,9 @@ public struct Game: Reducer {
                     .board(.init(mode: mode, difficulty: difficulty, style: style, level: .one))
                 )
                 return .none
+            case .path(.element(_, action: .board(.delegate(.finishGame)))):
+                state.path.removeAll()
+                return .none
             case .gameOptions:
                 return .none
             case .path:
@@ -78,7 +81,9 @@ public struct GameView: View {
     
     public var body: some View {
         NavigationStackStore(self.store.scope(state: \.path, action: { .path($0) })) {
-            GameOptionsView(store: self.store.scope(state: \.gameOptions, action: { .gameOptions($0)}))
+            GameOptionsView(
+                store: self.store.scope(state: \.gameOptions, action: { .gameOptions($0)})
+            )
         } destination: { state in
             switch state {
             case .board:

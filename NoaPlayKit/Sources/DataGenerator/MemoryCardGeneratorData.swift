@@ -135,19 +135,8 @@ extension Array where Element == MemoryCardGame.CardStyle {
 }
 
 public extension MemoryCardGame.Level {
-    static let one: Self = .init(type: .one, message: "Level 1", colors: .level("1"))
-    static let two: Self = .init(type: .two, message: "Level 2", colors: .level("2"))
-    static let three: Self = .init(type: .three, message: "Level 3", colors: .level("3"))
-    static let four: Self = .init(type: .four, message: "Level 4", colors: .level("4"))
-}
-
-public extension MemoryCardGame.Level.Colors {
-    static func level(_ level: String) -> Self {
-        .init(
-            background: .background(level: level),
-            backCard: .backCard(level: level),
-            frontCard: .frontCard(level: level),
-            details: .details(level: level)
-        )
-    }
+    static let one: Self = .init(type: .one, message: "Level 1")
+    static let two: Self = .init(type: .two, message: "Level 2")
+    static let three: Self = .init(type: .three, message: "Level 3")
+    static let four: Self = .init(type: .four, message: "Level 4")
 }

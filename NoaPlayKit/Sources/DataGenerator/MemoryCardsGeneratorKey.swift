@@ -53,17 +53,17 @@ public extension MemoryCardsGenerator {
             case .three:
                 return .four
             case .four:
-                return .init(type: .five, message: "Level 5", colors: .level("1"))
+                return .init(type: .five, message: "Level 5")
             case .five:
-                return difficulty == .easy ? nil : .init(type: .six, message: "Level 6", colors: .level("1"))
+                return difficulty == .easy ? nil : .init(type: .six, message: "Level 6")
             case .six:
-                return difficulty == .easy ? nil : .init(type: .seven, message: "Level 7", colors: .level("1"))
+                return difficulty == .easy ? nil : .init(type: .seven, message: "Level 7")
             case .seven:
-                return difficulty == .easy ? nil : .init(type: .eight, message: "Level 8", colors: .level("1"))
+                return difficulty == .easy ? nil : .init(type: .eight, message: "Level 8")
             case .eight:
-                return difficulty == .easy ? nil : .init(type: .nine, message: "Level 9", colors: .level("1"))
+                return difficulty == .easy ? nil : .init(type: .nine, message: "Level 9")
             case .nine:
-                return difficulty == .easy ? nil : .init(type: .ten, message: "Level 10", colors: .level("1"))
+                return difficulty == .easy ? nil : .init(type: .ten, message: "Level 10")
             case .ten:
                 return nil
             }
@@ -115,17 +115,17 @@ public extension MemoryCardsGenerator {
             case .three:
                 return .four
             case .four:
-                return .init(type: .five, message: "Level 5", colors: .level("1"))
+                return .init(type: .five, message: "Level 5")
             case .five:
-                return difficulty == .easy ? nil : .init(type: .six, message: "Level 6", colors: .level("1"))
+                return difficulty == .easy ? nil : .init(type: .six, message: "Level 6")
             case .six:
-                return difficulty == .easy ? nil : .init(type: .seven, message: "Level 7", colors: .level("1"))
+                return difficulty == .easy ? nil : .init(type: .seven, message: "Level 7")
             case .seven:
-                return difficulty == .easy ? nil : .init(type: .eight, message: "Level 8", colors: .level("1"))
+                return difficulty == .easy ? nil : .init(type: .eight, message: "Level 8")
             case .eight:
-                return difficulty == .easy ? nil : .init(type: .nine, message: "Level 9", colors: .level("1"))
+                return difficulty == .easy ? nil : .init(type: .nine, message: "Level 9")
             case .nine:
-                return difficulty == .easy ? nil : .init(type: .ten, message: "Level 10", colors: .level("1"))
+                return difficulty == .easy ? nil : .init(type: .ten, message: "Level 10")
             case .ten:
                 return nil
             }

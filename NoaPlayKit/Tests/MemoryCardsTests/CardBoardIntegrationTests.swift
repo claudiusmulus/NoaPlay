@@ -48,14 +48,14 @@ final class CardBoardIntegrationTests: XCTestCase {
             $0.level = .two
             $0.flippedPairCards = .init(matching: { $0.value == $1.value })
             $0.cards = [
-                .init(id: UUID(4), style: .number("1"), colors: .level("2")),
-                .init(id: UUID(5), style: .number("1"), colors: .level("2")),
-                .init(id: UUID(6), style: .number("2"), colors: .level("2")),
-                .init(id: UUID(7), style: .number("2"), colors: .level("2")),
-                .init(id: UUID(8), style: .number("3"), colors: .level("2")),
-                .init(id: UUID(9), style: .number("3"), colors: .level("2")),
-                .init(id: UUID(10), style: .number("4"), colors: .level("2")),
-                .init(id: UUID(11), style: .number("4"), colors: .level("2"))
+                .init(id: UUID(4), style: .number("1")),
+                .init(id: UUID(5), style: .number("1")),
+                .init(id: UUID(6), style: .number("2")),
+                .init(id: UUID(7), style: .number("2")),
+                .init(id: UUID(8), style: .number("3")),
+                .init(id: UUID(9), style: .number("3")),
+                .init(id: UUID(10), style: .number("4")),
+                .init(id: UUID(11), style: .number("4"))
             ]
         }
     }
@@ -96,10 +96,10 @@ final class CardBoardIntegrationTests: XCTestCase {
             $0.level = .one
             $0.flippedPairCards = .init(matching: { $0.value == $1.value })
             $0.cards = [
-                .init(id: UUID(4), style: .number("1"), colors: .level("1")),
-                .init(id: UUID(5), style: .number("1"), colors: .level("1")),
-                .init(id: UUID(6), style: .number("2"), colors: .level("1")),
-                .init(id: UUID(7), style: .number("2"), colors: .level("1"))
+                .init(id: UUID(4), style: .number("1")),
+                .init(id: UUID(5), style: .number("1")),
+                .init(id: UUID(6), style: .number("2")),
+                .init(id: UUID(7), style: .number("2"))
             ]
         }
     }

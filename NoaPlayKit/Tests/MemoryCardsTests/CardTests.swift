@@ -14,7 +14,7 @@ final class CardTests: XCTestCase {
 
     func testFlipCard() async {
         let store = TestStore<Card.State, Card.Action>(
-            initialState: Card.State(style: .number("1"), colors: .level("1"))
+            initialState: Card.State(style: .number("1"))
         ) {
             Card()
         } withDependencies: {

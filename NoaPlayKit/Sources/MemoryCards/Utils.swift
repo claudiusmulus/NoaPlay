@@ -14,7 +14,7 @@ extension MemoryCardGame.Level {
     func availableCards(style: MemoryCardGame.Style) -> IdentifiedArrayOf<Card.State> {
         @Dependency(\.dataGenerator.availableCards) var cardsGenerator
         let cardsArray: [Card.State] = cardsGenerator(self, style).map {
-            .init(style: $0, colors: self.colors)
+            .init(style: $0)
         }
         return .init(uniqueElements: cardsArray)
     }

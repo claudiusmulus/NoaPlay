@@ -14,20 +14,17 @@ public struct Card: Reducer {
     public struct State: Equatable, Identifiable {
         public let id: UUID
         let style: MemoryCardGame.CardStyle
-        let colors: MemoryCardGame.Level.Colors
         var isFlipped: Bool
         var isPaired: Bool
         
         public init(
             style: MemoryCardGame.CardStyle,
-            colors: MemoryCardGame.Level.Colors,
             isFlipped: Bool = false,
             isPaired: Bool = false
         ) {
             @Dependency(\.uuid) var uuid
             self.id = uuid()
             self.style = style
-            self.colors = colors
             self.isFlipped = isFlipped
             self.isPaired = isPaired
         }
@@ -36,13 +33,11 @@ public struct Card: Reducer {
         public init(
             id: UUID,
             style: MemoryCardGame.CardStyle,
-            colors: MemoryCardGame.Level.Colors,
             isFlipped: Bool = false,
             isPaired: Bool = false
         ) {
             self.id = id
             self.style = style
-            self.colors = colors
             self.isFlipped = isFlipped
             self.isPaired = isPaired
         }
@@ -76,7 +71,7 @@ struct CardView: View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             ZStack {
                 RoundedRectangle(cornerRadius: 20)
-                    .fill(viewStore.colors.frontCard)
+                    .fill(Color.cardFront)
                     .overlay {
                         ZStack {
                             LinearGradient(colors: [Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)), Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.5086403146)).opacity(0.5), Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 0))], startPoint: .topLeading, endPoint: .bottomTrailing)
@@ -99,8 +94,8 @@ struct CardView: View {
             }
             .cardFlipEffect(
                 isFaceUp: viewStore.isFlipped,
-                backgroundColor: viewStore.colors.backCard,
-                borderColor: viewStore.colors.details
+                backgroundColor: .onBackgroundPrimary,
+                borderColor: .actionPrimary
             )
             .scaleBounceEffect(1.15, trigger: viewStore.isPaired)
             .onTapGesture {
@@ -116,7 +111,6 @@ struct CardView: View {
         store: .init(
             initialState: Card.State(
                 style: .number("2"), 
-                colors: .level("1"),
                 isFlipped: true,
                 isPaired: true
             )

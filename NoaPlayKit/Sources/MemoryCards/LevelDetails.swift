@@ -96,8 +96,7 @@ struct LevelDetailsView: View {
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             ZStack {
-                Color(viewStore.completedLevel.colors.background)
-                    .ignoresSafeArea()
+                Color.backgroundPrimary.ignoresSafeArea()
                 
                 VStack(spacing: 0) {
                     ScrollView {
@@ -118,8 +117,9 @@ struct LevelDetailsView: View {
                             }
                         }
                     }
+                    .scrollBounceBehavior(.basedOnSize)
                     .safeAreaInset(edge: .top, content: {
-                        ZStack(alignment: .top) {
+                        ZStack(alignment: .topTrailing) {
                             Button(
                                 action: {
                                     viewStore.send(.finishGameButtonTapped)
@@ -132,15 +132,13 @@ struct LevelDetailsView: View {
                             )
                             .padding(20)
                             .frame(maxWidth: .infinity, alignment: .topTrailing)
-                            .background(viewStore.completedLevel.colors.background)
-                            .background(ignoresSafeAreaEdges: .top)
                         }
                     })
                     
                     HStack {
                         ScaledButton(
-                            color: viewStore.completedLevel.colors.details,
-                            shadowColor: viewStore.completedLevel.colors.background,
+                            color: .actionPrimary,
+                            shadowColor: .black,
                             action: {
                                 viewStore.send(.goToNextLevelButtonTapped)
                             }
@@ -160,8 +158,8 @@ struct LevelDetailsView: View {
                         .padding(.trailing, 10)
                         
                         ScaledButton(
-                            color: viewStore.completedLevel.colors.details,
-                            shadowColor: viewStore.completedLevel.colors.background,
+                            color: .actionPrimary,
+                            shadowColor: .black,
                             action: {
                                 viewStore.send(.tryCurrentLevelButtonTapped)
                             }
@@ -182,157 +180,10 @@ struct LevelDetailsView: View {
                         
                     }
                     .padding(.vertical, 20)
-                    .background(
-                        Color(viewStore.completedLevel.colors.backCard)
-                    )
+                    .background(Color.backgroundSecondary)
                     .background(ignoresSafeAreaEdges: .bottom)
                 }
             }
-        }
-    }
-    
-    private func verticalActionView(
-        viewStore: ViewStoreOf<LevelDetails>
-    ) -> some View {
-        VStack(spacing: 20) {
-            ScaledButton(
-                color: viewStore.completedLevel.colors.details,
-                shadowColor: viewStore.completedLevel.colors.background,
-                action: {
-                    self.animateDissapear()
-                    viewStore.send(.goToNextLevelButtonTapped)
-                }
-            ) {
-                HStack(spacing: 10) {
-                    Image(systemName: "arrow.right.circle")
-                        .font(.system(size: 25).bold())
-                    Text("Next Level")
-                        .lineLimit(1)
-                        .font(.title3.bold())
-                        .minimumScaleFactor(0.6)
-                }
-                .frame(maxWidth: .infinity)
-            }
-            
-            ScaledButton(
-                color: viewStore.completedLevel.colors.details,
-                shadowColor: viewStore.completedLevel.colors.background,
-                action: {
-                    self.animateDissapear()
-                    viewStore.send(.tryCurrentLevelButtonTapped)
-                }
-            ) {
-                HStack(spacing: 10) {
-                    Image(systemName: "arrow.up.circle")
-                        .font(.system(size: 25).bold())
-                    Text("Try again")
-                        .lineLimit(1)
-                        .font(.title3.bold())
-                        .minimumScaleFactor(0.6)
-                }
-                .frame(maxWidth: .infinity)
-            }
-            
-            ScaledButton(
-                color: viewStore.completedLevel.colors.details,
-                shadowColor: viewStore.completedLevel.colors.background,
-                action: {
-                    viewStore.send(.finishGameButtonTapped)
-                }
-            ) {
-                HStack(spacing: 10) {
-                    Image(systemName: "xmark.circle")
-                        .font(.system(size: 25).bold())
-                    Text("Finish")
-                        .lineLimit(1)
-                        .font(.title3.bold())
-                        .minimumScaleFactor(0.6)
-                }
-                .frame(maxWidth: .infinity)
-            }
-        }
-        .fixedSize(horizontal: true, vertical: false)
-    }
-    
-    private func horizontalActionView(
-        viewStore: ViewStoreOf<LevelDetails>
-    ) -> some View {
-        HStack(spacing: 10) {
-            VStack {
-                ScaledButton(
-                    color: viewStore.completedLevel.colors.details,
-                    shadowColor: viewStore.completedLevel.colors.background,
-                    action: {
-                        self.animateDissapear()
-                        viewStore.send(.goToNextLevelButtonTapped)
-                    }
-                ) {
-                    VStack(spacing: 10) {
-                        Image(systemName: "arrow.right.circle")
-                            .font(.system(size: 50).bold())
-                        Text("Next Level")
-                            .font(.title.bold())
-                    }
-                    .padding(20)
-                    .frame(minWidth: 0, maxWidth: .infinity, maxHeight: .infinity)
-                }
-                .padding()
-            }
-            
-            VStack {
-                ScaledButton(
-                    color: viewStore.completedLevel.colors.details,
-                    shadowColor: viewStore.completedLevel.colors.background,
-                    action: {
-                        self.animateDissapear()
-                        viewStore.send(.tryCurrentLevelButtonTapped)
-                    }
-                ) {
-                    VStack(spacing: 10) {
-                        Image(systemName: "arrow.up.circle")
-                            .font(.system(size: 50).bold())
-                        Text("Try again")
-                            .font(.title.bold())
-                    }
-                    .padding(20)
-                    .frame(minWidth: 0, maxWidth: .infinity, maxHeight: .infinity)
-                }
-                .padding()
-            }
-            
-            VStack {
-                ScaledButton(
-                    color: viewStore.completedLevel.colors.details,
-                    shadowColor: viewStore.completedLevel.colors.background,
-                    action: {
-                        viewStore.send(.finishGameButtonTapped)
-                    }
-                ) {
-                    VStack(spacing: 10) {
-                        Image(systemName: "xmark.circle")
-                            .font(.system(size: 50).bold())
-                        Text("Finish")
-                            .font(.title.bold())
-                    }
-                    .padding(20)
-                    .frame(minWidth: 0, maxWidth: .infinity, maxHeight: .infinity)
-                }
-                .padding()
-            }
-
-        }
-        .fixedSize(horizontal: false, vertical: true)
-    }
-    
-    func animateDissapear() {
-        withAnimation(.easeInOut(duration: 0.3)) {
-            self.isImageAppear = false
-            self.isMessageAppear = false
-            self.isActionButtonsAppear = false
-        }
-        withAnimation(.easeInOut(duration: 0.3)) {
-            self.isBackgroundAppear = false
-            self.isScalling = false
         }
     }
 }

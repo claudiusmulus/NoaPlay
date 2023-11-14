@@ -96,36 +96,42 @@ public struct GameOptionsView: View {
     public var body: some View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             ZStack {
-                Color.gameBackground.ignoresSafeArea()
+                Color.white.ignoresSafeArea()
                 
                 VStack(spacing: 0) {
                     ScrollView {
-                        Spacer(minLength: 20)
                         gameOptionSection(
                             options: viewStore.availableModes,
                             title: "Game mode",
                             isSelected: { $0 == viewStore.selectedMode },
                             action: {
-                                viewStore.send(.selectModeTapped(mode: $0))
+                                viewStore.send(
+                                    .selectModeTapped(mode: $0),
+                                    animation: .bouncy
+                                )
                             }
                         ) { mode in
                             VStack(spacing: 10) {
                                 Image(systemName: mode.iconName)
                                     .font(.system(.largeTitle))
+                                    
                                 Text(mode.title)
                                     .font(.largeTitle.bold())
                                     .minimumScaleFactor(0.4)
                                     .lineLimit(1)
                             }
                             .fontWeight(.heavy)
-                            .foregroundStyle(.white)
+                            .foregroundStyle(mode == viewStore.selectedMode ? Color.actionPrimary  : .white)
                         }
                         gameOptionSection(
                             options: viewStore.availableStyles,
                             title: "Game style",
                             isSelected: { $0 == viewStore.selectedStyle },
                             action: {
-                                viewStore.send(.selectStyleTapped(style: $0))
+                                viewStore.send(
+                                    .selectStyleTapped(style: $0),
+                                    animation: .bouncy
+                                )
                             }
                         ) { style in
                             VStack(spacing: 10) {
@@ -134,19 +140,20 @@ public struct GameOptionsView: View {
                                     .minimumScaleFactor(0.4)
                                     .lineLimit(1)
                                     .fontWeight(.heavy)
-                                    .foregroundStyle(.white)
-                                
+                                    .foregroundStyle(style == viewStore.selectedStyle ? Color.actionPrimary  : .white)
                             }
                             .fontWeight(.heavy)
-                            .foregroundStyle(.white)
                             .padding(.horizontal)
                         }
                         gameOptionSection(
                             options: viewStore.difficultyLevels,
                             title: "Difficulty",
                             isSelected: { $0 == viewStore.selectedDifficultyLevel },
-                            action: { _ in
-                                //viewStore.send(.selectStyleTapped(style: $0))
+                            action: {
+                                viewStore.send(
+                                    .selectDifficultyTapped(difficulty: $0),
+                                    animation: .bouncy
+                                )
                             }
                         ) { difficultyLevel in
                             VStack(spacing: 10) {
@@ -155,7 +162,7 @@ public struct GameOptionsView: View {
                                     .minimumScaleFactor(0.4)
                                     .lineLimit(1)
                                     .fontWeight(.heavy)
-                                    .foregroundStyle(.white)
+                                    .foregroundStyle(difficultyLevel == viewStore.selectedDifficultyLevel ? Color.actionPrimary  : .white)
                             }
                             .fontWeight(.heavy)
                             .foregroundStyle(.white)
@@ -163,9 +170,11 @@ public struct GameOptionsView: View {
                         }
                         .padding(.bottom, 40)
                     }
+                    .scrollBounceBehavior(.basedOnSize)
+                    
                     HStack {
                         ScaledButton(
-                            color: .gameAction,
+                            color: .actionPrimary,
                             shadowColor: .white,
                             action: {
                                 viewStore.send(.startGameButtonTapped)
@@ -182,14 +191,10 @@ public struct GameOptionsView: View {
                         .padding(.horizontal, 40)
                     }
                     .padding(.top, 20)
-                    .background(
-                        Color.gameBackground
-                            .shadow(color: .black.opacity(0.3), radius: 5, x: 0, y: 0)
-                            .mask(Rectangle().padding(.top, -10))
-                    )
+                    .padding(.bottom, 10)
+                    .background(Color.backgroundSecondary)
+                    .background(ignoresSafeAreaEdges: .bottom)
                 }
-                .ignoresSafeArea(edges: [.top])
-                .padding(.bottom, 10)
             }
         }
     }
@@ -215,10 +220,11 @@ public struct GameOptionsView: View {
                         spacing: 10
                     ){
                         ForEach(options, id: \.self) { option in
-                            GameOption(color: .gameOption) {
+                            GameOption(color: .onBackgroundPrimary) {
                                 label(option)
+                                
                             }
-                            .borderOverlay(lineWidth: 6, cornerRadius: 20, color: isSelected(option) ? .gameAction : .clear)
+                            .borderOverlay(lineWidth: 6, cornerRadius: 20, color: isSelected(option) ? .actionPrimary : .clear)
                             .frame(width: 200)
                             .padding(.horizontal, 10)
                             .padding(.vertical, 10)
