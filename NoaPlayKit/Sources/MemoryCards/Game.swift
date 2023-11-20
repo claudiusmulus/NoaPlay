@@ -53,7 +53,7 @@ public struct Game: Reducer {
             switch action {
             case let .gameOptions(.delegate(.startGame(mode, style, difficulty))):
                 state.path.append(
-                    .board(.init(mode: mode, difficulty: difficulty, style: style, level: .one))
+                    .board(.init(mode: mode, difficulty: difficulty, style: style, level: difficulty.initialLevel()))
                 )
                 return .none
             case .path(.element(_, action: .board(.delegate(.finishGame)))):
@@ -68,7 +68,6 @@ public struct Game: Reducer {
         .forEach(\.path, action: /Action.path) {
           Path()
         }
-        ._printChanges()
     }
 }
 
@@ -105,9 +104,9 @@ public struct GameView: View {
         store: .init(
             initialState: Game.State(
                 gameOptions: .init(
-                    availableModes: MemoryCardGame.Mode.allCases,
-                    availableStyles: MemoryCardGame.Style.allCases, 
-                    difficultyLevels: MemoryCardGame.Difficulty.allCases
+                    modeSection: .init(title: "Game mode", availableModes: MemoryCardGame.Mode.allCases, selectedMode: .practice),
+                    styleSection: .init(title: "Game style", availableStyles: MemoryCardGame.Style.allCases, selectedStyle: .numbers),
+                    difficultySection: .init(title: "Difficulty", availableOptions: MemoryCardGame.Difficulty.allCases, selectedOption: .easy)
                 )
             )
         ) {

@@ -11,29 +11,18 @@ import Models
 
 struct ContentView: View {
     var body: some View {
-//        CardBoardView(
-//            store: .init(
-//                initialState: CardBoard.State(
-//                    mode: .default,
-//                    difficulty: .easy, 
-//                    style: .numbers,
-//                    level: .one
-//                )
-//            ) {
-//                CardBoard()
-//            }
-//        )
         GameView(
             store: .init(
                 initialState: Game.State(
                     gameOptions: .init(
-                        availableModes: MemoryCardGame.Mode.allCases,
-                        availableStyles: MemoryCardGame.Style.allCases,
-                        difficultyLevels: MemoryCardGame.Difficulty.allCases
+                        modeSection: .init(title: "Game mode", availableModes: MemoryCardGame.Mode.allCases, selectedMode: .practice),
+                        styleSection: .init(title: "Game style", availableStyles: MemoryCardGame.Style.allCases, selectedStyle: .numbers),
+                        difficultySection: .init(title: "Difficulty", availableOptions: MemoryCardGame.Difficulty.allCases, selectedOption: .easy)
                     )
                 )
             ) {
                 Game()
+                    ._printChanges()
             }
         )
     }

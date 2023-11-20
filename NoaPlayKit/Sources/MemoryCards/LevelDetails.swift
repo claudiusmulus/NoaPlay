@@ -86,12 +86,6 @@ public struct LevelDetails: Reducer {
 
 struct LevelDetailsView: View {
     let store: StoreOf<LevelDetails>
-    @State private var isScalling = false
-    
-    @State private var isBackgroundAppear = false
-    @State private var isImageAppear = false
-    @State private var isMessageAppear = false
-    @State private var isActionButtonsAppear = false
     
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in

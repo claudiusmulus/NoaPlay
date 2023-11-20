@@ -209,7 +209,7 @@ public struct CardBoard: Reducer {
         .ifLet(\.showLevelDetails, action: /Action.showLevelDetails) {
             LevelDetails()
         }
-        ._printChanges()
+        //._printChanges()
     }
     
     // MARK: - Utils
@@ -297,16 +297,10 @@ public struct CardBoardView: View {
     struct ViewState: Equatable {
         let cards: IdentifiedArrayOf<Card.State>
         let level: MemoryCardGame.Level
-        let showTimer: Bool
-        let gameDuration: String
-        let didStartGame: Bool
         
         init(state: CardBoard.State) {
             self.cards = state.cards
             self.level = state.level
-            self.showTimer = state.showTimer
-            self.didStartGame = state.didStartGame
-            self.gameDuration = state.formattedGameDuration()
         }
     }
     
@@ -333,6 +327,35 @@ public struct CardBoardView: View {
             }
             .scrollBounceBehavior(.basedOnSize)
             .safeAreaInset(edge: .top, content: {
+                HeaderView(store: self.store)
+            })
+            .background(Color.backgroundPrimary)
+            .showDetails(
+                store: self.store.scope(state: \.showLevelDetails, action: { .showLevelDetails($0)})
+            ) { store in
+                LevelDetailsView(store: store)
+                    .transition(.opacity)
+            }
+        }
+    }
+    
+    private struct HeaderView: View {
+        let store: StoreOf<CardBoard>
+        
+        struct ViewState: Equatable {
+            let showTimer: Bool
+            let gameDuration: String
+            let didStartGame: Bool
+            
+            init(state: CardBoard.State) {
+                self.didStartGame = state.didStartGame
+                self.gameDuration = state.formattedGameDuration()
+                self.showTimer = state.showTimer
+            }
+        }
+        
+        var body: some View {
+            WithViewStore(self.store, observe: ViewState.init) { viewStore in
                 ZStack(alignment: .top) {
                     Button(
                         action: {
@@ -362,13 +385,6 @@ public struct CardBoardView: View {
                         .padding(.vertical, 20)
                     }
                 }
-            })
-            .background(Color.backgroundPrimary)
-            .showDetails(
-                store: self.store.scope(state: \.showLevelDetails, action: { .showLevelDetails($0)})
-            ) { store in
-                LevelDetailsView(store: store)
-                    .transition(.opacity)
             }
         }
     }

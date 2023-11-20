@@ -13,38 +13,27 @@ import Theme
 
 public struct GameOptions: Reducer {
     public init() {
-        
     }
     public struct State: Equatable {
-        let availableModes: [MemoryCardGame.Mode]
-        let availableStyles: [MemoryCardGame.Style]
-        let difficultyLevels: [MemoryCardGame.Difficulty]
-        
-        var selectedMode: MemoryCardGame.Mode
-        var selectedStyle: MemoryCardGame.Style
-        var selectedDifficultyLevel: MemoryCardGame.Difficulty
+        var modeSection: GameModeSection.State
+        var styleSection: GameStyleSection.State
+        var difficultySection: GameDifficultySection.State
         
         public init(
-            availableModes: [MemoryCardGame.Mode],
-            availableStyles: [MemoryCardGame.Style],
-            difficultyLevels: [MemoryCardGame.Difficulty],
-            selectedMode: MemoryCardGame.Mode = .practice,
-            selectedStyle: MemoryCardGame.Style = .numbers,
-            selectedDifficultyLevel: MemoryCardGame.Difficulty = .easy
+            modeSection: GameModeSection.State,
+            styleSection: GameStyleSection.State,
+            difficultySection: GameDifficultySection.State
         ) {
-            self.availableModes = availableModes
-            self.availableStyles = availableStyles
-            self.difficultyLevels = difficultyLevels
-            self.selectedMode = selectedMode
-            self.selectedStyle = selectedStyle
-            self.selectedDifficultyLevel = selectedDifficultyLevel
+            self.modeSection = modeSection
+            self.styleSection = styleSection
+            self.difficultySection = difficultySection
         }
     }
     public enum Action: Equatable {
         case delegate(Delegate)
-        case selectDifficultyTapped(difficulty: MemoryCardGame.Difficulty)
-        case selectModeTapped(mode: MemoryCardGame.Mode)
-        case selectStyleTapped(style: MemoryCardGame.Style)
+        case modeSection(GameModeSection.Action)
+        case styleSection(GameStyleSection.Action)
+        case difficultySection(GameDifficultySection.Action)
         case startGameButtonTapped
         
         public enum Delegate: Equatable {
@@ -57,30 +46,37 @@ public struct GameOptions: Reducer {
     }
     
     public var body: some Reducer<State, Action> {
+        
+        Scope(state: \.modeSection, action: /Action.modeSection) {
+            GameModeSection()
+        }
+        
+        Scope(state: \.styleSection, action: /Action.styleSection) {
+            GameStyleSection()
+        }
+        
+        Scope(state: \.difficultySection, action: /Action.difficultySection) {
+            GameDifficultySection()
+        }
+        
         Reduce { state, action in
             switch action {
             case .delegate:
                 return .none
-            case let .selectDifficultyTapped(difficulty):
-                if difficulty != state.selectedDifficultyLevel {
-                    state.selectedDifficultyLevel = difficulty
-                }
-                
-                return .none
-            case let .selectModeTapped(mode):
-                if mode != state.selectedMode {
-                    state.selectedMode = mode
-                }
-                return .none
-            case let .selectStyleTapped(style):
-                if style != state.selectedStyle {
-                    state.selectedStyle = style
-                }
+            case .difficultySection:
                 return .none
             case .startGameButtonTapped:
-                return .run { [mode = state.selectedMode, style = state.selectedStyle, difficulty = state.selectedDifficultyLevel] send in
+                return .run { 
+                    [mode = state.modeSection.selectedMode,
+                     style = state.styleSection.selectedStyle,
+                     difficulty = state.difficultySection.selectedOption
+                    ] send in
                     await send(.delegate(.startGame(mode: mode, style: style, difficulty: difficulty)))
                 }
+            case .modeSection:
+                return .none
+            case .styleSection:
+                return .none
             }
         }
     }
@@ -93,82 +89,49 @@ public struct GameOptionsView: View {
         self.store = store
     }
     
+    struct ViewStore: Equatable {
+        init(state: GameOptions.State) {
+        }
+    }
+    
     public var body: some View {
-        WithViewStore(self.store, observe: { $0 }) { viewStore in
+        
+        WithViewStore(self.store, observe: ViewStore.init) { viewStore in
             ZStack {
                 Color.white.ignoresSafeArea()
                 
                 VStack(spacing: 0) {
                     ScrollView {
-                        gameOptionSection(
-                            options: viewStore.availableModes,
-                            title: "Game mode",
-                            isSelected: { $0 == viewStore.selectedMode },
-                            action: {
-                                viewStore.send(
-                                    .selectModeTapped(mode: $0),
-                                    animation: .bouncy
+                        Section {
+                            GameModeSectionView(
+                                store: self.store.scope(
+                                    state: \.modeSection,
+                                    action: { .modeSection($0)}
                                 )
-                            }
-                        ) { mode in
-                            VStack(spacing: 10) {
-                                Image(systemName: mode.iconName)
-                                    .font(.system(.largeTitle))
-                                    
-                                Text(mode.title)
-                                    .font(.largeTitle.bold())
-                                    .minimumScaleFactor(0.4)
-                                    .lineLimit(1)
-                            }
-                            .fontWeight(.heavy)
-                            .foregroundStyle(mode == viewStore.selectedMode ? Color.actionPrimary  : .white)
+                            )
+                            .padding(.leading, 40)
+                            .padding(.top, 20)
                         }
-                        gameOptionSection(
-                            options: viewStore.availableStyles,
-                            title: "Game style",
-                            isSelected: { $0 == viewStore.selectedStyle },
-                            action: {
-                                viewStore.send(
-                                    .selectStyleTapped(style: $0),
-                                    animation: .bouncy
+                        
+                        Section {
+                            GameStyleOptionView(
+                                store: self.store.scope(
+                                    state: \.styleSection,
+                                    action: { .styleSection($0)}
                                 )
-                            }
-                        ) { style in
-                            VStack(spacing: 10) {
-                                Text(style.title)
-                                    .font(.system(.largeTitle).bold())
-                                    .minimumScaleFactor(0.4)
-                                    .lineLimit(1)
-                                    .fontWeight(.heavy)
-                                    .foregroundStyle(style == viewStore.selectedStyle ? Color.actionPrimary  : .white)
-                            }
-                            .fontWeight(.heavy)
-                            .padding(.horizontal)
+                            )
+                            .padding(.leading, 40)
                         }
-                        gameOptionSection(
-                            options: viewStore.difficultyLevels,
-                            title: "Difficulty",
-                            isSelected: { $0 == viewStore.selectedDifficultyLevel },
-                            action: {
-                                viewStore.send(
-                                    .selectDifficultyTapped(difficulty: $0),
-                                    animation: .bouncy
+
+                        Section {
+                            GameDifficultyOptionView(
+                                store: self.store.scope(
+                                    state: \.difficultySection,
+                                    action: { .difficultySection($0)}
                                 )
-                            }
-                        ) { difficultyLevel in
-                            VStack(spacing: 10) {
-                                Text(difficultyLevel.title)
-                                    .font(.system(.largeTitle).bold())
-                                    .minimumScaleFactor(0.4)
-                                    .lineLimit(1)
-                                    .fontWeight(.heavy)
-                                    .foregroundStyle(difficultyLevel == viewStore.selectedDifficultyLevel ? Color.actionPrimary  : .white)
-                            }
-                            .fontWeight(.heavy)
-                            .foregroundStyle(.white)
-                            .padding(.horizontal)
+                            )
+                            .padding([.leading, .bottom], 40)
                         }
-                        .padding(.bottom, 40)
                     }
                     .scrollBounceBehavior(.basedOnSize)
                     
@@ -198,77 +161,15 @@ public struct GameOptionsView: View {
             }
         }
     }
-    
-    @ViewBuilder
-    private func gameOptionSection<Option: Hashable, Content: View>(
-        options: [Option],
-        height: CGFloat = 140.0,
-        title: String,
-        isSelected: @escaping (Option) -> Bool,
-        action: @escaping (Option) -> Void,
-        @ViewBuilder label: @escaping (Option) -> Content
-    ) -> some View {
-        Section {
-            VStack(alignment: .leading, spacing: 4) {
-                Text(title)
-                    .font(.system(.largeTitle).weight(.bold))
-                    .frame(maxWidth: .infinity, alignment: .leading)
-
-                ScrollView(.horizontal) {
-                    LazyHGrid(
-                        rows: [GridItem(.fixed(height), spacing: 10)],
-                        spacing: 10
-                    ){
-                        ForEach(options, id: \.self) { option in
-                            GameOption(color: .onBackgroundPrimary) {
-                                label(option)
-                                
-                            }
-                            .borderOverlay(lineWidth: 6, cornerRadius: 20, color: isSelected(option) ? .actionPrimary : .clear)
-                            .frame(width: 200)
-                            .padding(.horizontal, 10)
-                            .padding(.vertical, 10)
-                            .onTapGesture {
-                                action(option)
-                            }
-                        }
-                    }
-                }
-                .scrollIndicators(.hidden)
-            }
-            .padding(.leading, 40)
-            .padding(.top, 20)
-        }
-    }
 }
-
-struct GameOption<Content: View>: View {
-    let color: Color
-    let content: Content
-    
-    init(color: Color, @ViewBuilder content: () -> Content) {
-        self.color = color
-        self.content = content()
-    }
-    
-    var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 20).fill(color)
-            content
-        }
-    }
-}
-
-
-
 
 #Preview {
     GameOptionsView(
         store: .init(
             initialState: GameOptions.State(
-                availableModes: MemoryCardGame.Mode.allCases,
-                availableStyles: MemoryCardGame.Style.allCases, 
-                difficultyLevels: MemoryCardGame.Difficulty.allCases
+                modeSection: .init(title: "Game mode", availableModes: MemoryCardGame.Mode.allCases, selectedMode: .practice),
+                styleSection: .init(title: "Game style", availableStyles: MemoryCardGame.Style.allCases, selectedStyle: .numbers),
+                difficultySection: .init(title: "Difficulty", availableOptions: MemoryCardGame.Difficulty.allCases, selectedOption: .easy)
             )) {
                 GameOptions()
             }
@@ -279,9 +180,9 @@ struct GameOption<Content: View>: View {
     GameOptionsView(
         store: .init(
             initialState: GameOptions.State(
-                availableModes: MemoryCardGame.Mode.allCases,
-                availableStyles: MemoryCardGame.Style.allCases,
-                difficultyLevels: MemoryCardGame.Difficulty.allCases
+                modeSection: .init(title: "Game mode", availableModes: MemoryCardGame.Mode.allCases, selectedMode: .practice),
+                styleSection: .init(title: "Game style", availableStyles: MemoryCardGame.Style.allCases, selectedStyle: .numbers),
+                difficultySection: .init(title: "Difficulty", availableOptions: MemoryCardGame.Difficulty.allCases, selectedOption: .easy)
             )) {
                 GameOptions()
             }
