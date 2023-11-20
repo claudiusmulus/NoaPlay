@@ -11,6 +11,7 @@ import Models
 import FormattersClient
 import Pow
 
+@Reducer
 public struct CardBoard: Reducer {
     
     public init() {        
@@ -76,7 +77,7 @@ public struct CardBoard: Reducer {
     }
     
     public enum Action: Equatable {
-        case card(id: Card.State.ID, action: Card.Action)
+        case cards(IdentifiedActionOf<Card>)
         case closeGameButtonTapped
         case delegate(Delegate)
         case showLevelDetails(LevelDetails.Action)
@@ -106,7 +107,7 @@ public struct CardBoard: Reducer {
         
         Reduce { state, action in
             switch action {
-            case let .card(_, .delegate(delegateAction)):
+            case let .cards(.element(_ , .delegate(delegateAction))):
                 let delegateEffect = self.reduceDelegateAction(state: &state, action: delegateAction)
                 guard !state.didStartGame else {
                     return delegateEffect
@@ -124,8 +125,7 @@ public struct CardBoard: Reducer {
                     }
                     .cancellable(id: CancelID.gameTimer, cancelInFlight: true)
                 )
-                
-            case .card:
+            case .cards:
                 return .none
             case .closeGameButtonTapped:
                 return .merge(
@@ -203,10 +203,10 @@ public struct CardBoard: Reducer {
                 return .none
             }
         }
-        .forEach(\.cards, action: /CardBoard.Action.card) {
+        .forEach(\.cards, action: \.cards) {
             Card()
         }
-        .ifLet(\.showLevelDetails, action: /Action.showLevelDetails) {
+        .ifLet(\.showLevelDetails, action: \.showLevelDetails) {
             LevelDetails()
         }
         //._printChanges()
@@ -314,10 +314,7 @@ public struct CardBoardView: View {
                     spacing: 30
                 ) {
                     ForEachStore(
-                        store.scope(
-                            state: \.cards,
-                            action: CardBoard.Action.card
-                        )
+                        store.scope(state: \.cards, action: { .cards($0)})
                     ) { store in
                         CardView(store: store)
                             .frame(height: 200)
@@ -336,6 +333,7 @@ public struct CardBoardView: View {
                 LevelDetailsView(store: store)
                     .transition(.opacity)
             }
+            
         }
     }
     

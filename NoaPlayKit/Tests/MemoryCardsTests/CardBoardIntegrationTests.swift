@@ -31,12 +31,12 @@ final class CardBoardIntegrationTests: XCTestCase {
         
         store.exhaustivity = .off(showSkippedAssertions: false)
         
-        await store.send(.card(id: UUID(0), action: .delegate(.attemptToFlipCard(id: UUID(0)))))
-        await store.send(.card(id: UUID(1), action: .delegate(.attemptToFlipCard(id: UUID(1)))))
+        await store.send(.cards(.element(id: UUID(0), action: .delegate(.attemptToFlipCard(id: UUID(0))))))
+        await store.send(.cards(.element(id: UUID(1), action: .delegate(.attemptToFlipCard(id: UUID(1))))))
         await store.receive(.showMatch(id1: UUID(0), id2: UUID(1)))
         
-        await store.send(.card(id: UUID(2), action: .delegate(.attemptToFlipCard(id: UUID(2)))))
-        await store.send(.card(id: UUID(3), action: .delegate(.attemptToFlipCard(id: UUID(3)))))
+        await store.send(.cards(.element(id: UUID(2), action: .delegate(.attemptToFlipCard(id: UUID(2))))))
+        await store.send(.cards(.element(id: UUID(3), action: .delegate(.attemptToFlipCard(id: UUID(3))))))
         await store.receive(.showMatch(id1: UUID(2), id2: UUID(3)))
         
         await store.receive(.completeLevel(.one))
@@ -79,12 +79,12 @@ final class CardBoardIntegrationTests: XCTestCase {
         
         store.exhaustivity = .off(showSkippedAssertions: false)
         
-        await store.send(.card(id: UUID(0), action: .delegate(.attemptToFlipCard(id: UUID(0)))))
-        await store.send(.card(id: UUID(1), action: .delegate(.attemptToFlipCard(id: UUID(1)))))
+        await store.send(.cards(.element(id: UUID(0), action: .delegate(.attemptToFlipCard(id: UUID(0))))))
+        await store.send(.cards(.element(id: UUID(1), action: .delegate(.attemptToFlipCard(id: UUID(1))))))
         await store.receive(.showMatch(id1: UUID(0), id2: UUID(1)))
         
-        await store.send(.card(id: UUID(2), action: .delegate(.attemptToFlipCard(id: UUID(2)))))
-        await store.send(.card(id: UUID(3), action: .delegate(.attemptToFlipCard(id: UUID(3)))))
+        await store.send(.cards(.element(id: UUID(2), action: .delegate(.attemptToFlipCard(id: UUID(2))))))
+        await store.send(.cards(.element(id: UUID(3), action: .delegate(.attemptToFlipCard(id: UUID(3))))))
         await store.receive(.showMatch(id1: UUID(2), id2: UUID(3)))
         
         await store.receive(.completeLevel(.one))
@@ -123,12 +123,12 @@ final class CardBoardIntegrationTests: XCTestCase {
         
         store.exhaustivity = .off(showSkippedAssertions: false)
         
-        await store.send(.card(id: UUID(0), action: .delegate(.attemptToFlipCard(id: UUID(0)))))
-        await store.send(.card(id: UUID(1), action: .delegate(.attemptToFlipCard(id: UUID(1)))))
+        await store.send(.cards(.element(id: UUID(0), action: .delegate(.attemptToFlipCard(id: UUID(0))))))
+        await store.send(.cards(.element(id: UUID(1), action: .delegate(.attemptToFlipCard(id: UUID(1))))))
         await store.receive(.showMatch(id1: UUID(0), id2: UUID(1)))
         
-        await store.send(.card(id: UUID(2), action: .delegate(.attemptToFlipCard(id: UUID(2)))))
-        await store.send(.card(id: UUID(3), action: .delegate(.attemptToFlipCard(id: UUID(3)))))
+        await store.send(.cards(.element(id: UUID(2), action: .delegate(.attemptToFlipCard(id: UUID(2))))))
+        await store.send(.cards(.element(id: UUID(3), action: .delegate(.attemptToFlipCard(id: UUID(3))))))
         await store.receive(.showMatch(id1: UUID(2), id2: UUID(3)))
         
         await store.receive(.completeLevel(.one))

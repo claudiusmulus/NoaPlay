@@ -10,6 +10,7 @@ import ComposableArchitecture
 import Models
 import VisualComponents
 
+@Reducer
 public struct Game: Reducer {
     public init() {}
     
@@ -31,6 +32,7 @@ public struct Game: Reducer {
         case gameOptions(GameOptions.Action)
     }
     
+    @Reducer
     public struct Path: Reducer {
         public enum State: Equatable {
             case board(CardBoard.State)
@@ -39,7 +41,7 @@ public struct Game: Reducer {
             case board(CardBoard.Action)
         }
         public var body: some ReducerOf<Self> {
-          Scope(state: /State.board, action: /Action.board) {
+            Scope(state: /State.board, action: /Action.board) {
             CardBoard()
           }
         }
