@@ -376,7 +376,6 @@ public struct CardBoardView: View {
                                 .contentTransition(.symbolEffect(.replace))
                             
                             Text(viewStore.gameDuration)
-                            
                         }
                         .font(.system(size: 48, weight: .bold))
                         .foregroundStyle(.white)
